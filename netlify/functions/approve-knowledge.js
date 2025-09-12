@@ -1,29 +1,28 @@
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+const { createClient } = require('@supabase/supabase-js');
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
-export async function handler(event, context) {
-  if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method not allowed" };
-  }
-
+exports.handler = async (event) => {
   try {
-    const { id } = JSON.parse(event.body);
+    if (event.httpMethod !== "POST") {
+      return { statusCode: 405, body: "Method Not Allowed" };
+    }
+
+    const { id, approved } = JSON.parse(event.body);
 
     const { data, error } = await supabase
-      .from("knowledge")
-      .update({ approved: true })
+      .from("knowledge_library")
+      .update({ approved })
       .eq("id", id);
 
     if (error) throw error;
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: "Knowledge approved!" }),
+      body: JSON.stringify({ success: true, data }),
     };
   } catch (err) {
-    return { statusCode: 400, body: JSON.stringify({ error: err.message }) };
+    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
   }
-}
+};
