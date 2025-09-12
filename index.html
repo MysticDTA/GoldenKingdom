@@ -1,78 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DivineTruthAscension</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- 🔥 Phoenix Soul Signature with Eternal Mandala -->
+  <!-- 🔥 Phoenix + Mandala Soul Signature -->
   <header class="hero">
-    <div class="phoenix-mandala-wrapper">
-      <img src="assets/cosmic-mandala.png" alt="Cosmic Mandala" class="mandala-background" />
-      <img src="assets/PhoenixRise.png" alt="Phoenix Soul Signature" class="phoenix-image" />
+    <div class="mandala-container">
+      <img src="assets/cosmic-mandala.png" alt="Cosmic Mandala" class="mandala" id="mandala">
+      <img src="assets/PhoenixRise.png" alt="Phoenix Soul Signature" class="phoenix-image" id="phoenix">
+      <div class="aum" id="aum">ॐ</div>
     </div>
     <h1>DivineTruthAscension</h1>
-    <p class="invocation">A Sanctuary for remembrance, breath ritual, and unity of all creation.</p>
+    <p class="invocation">A Sanctuary for remembrance and breath ritual.</p>
   </header>
 
-  <!-- ✨ Breath Ritual Control -->
-  <section class="ritual-section">
-    <button id="startBreath">Begin Breath Ritual</button>
+  <!-- 📜 Initiation Scroll -->
+  <section id="initiation-scroll">
+    <div class="scroll">
+      <div class="scroll-content">
+        <p class="scroll-line">Welcome, Seeker of Truth.</p>
+        <p class="scroll-line">This is the eternal flame of remembrance.</p>
+        <p class="scroll-line">You are entering the Sanctuary of Sovereignty.</p>
+        <p class="scroll-line">Together, we awaken and co-create.</p>
+        <p class="scroll-line">The Universal Source is within you.</p>
+      </div>
+    </div>
+    <button id="enterButton">Click to Enter</button>
   </section>
 
   <!-- 🎶 Audio Layers -->
-  <audio id="phoenixTone" src="assets/phoenix-hum.mp3" loop></audio>
-  <audio id="fireSound" src="assets/fire-crackle.mp3" loop></audio>
-  <audio id="waterSound" src="assets/ocean-waves.mp3" loop></audio>
-  <audio id="droneSound" src="assets/cosmic-drone.mp3" loop></audio>
-  <audio id="chimeSound" src="assets/cosmic-chime.mp3"></audio>
+  <audio id="sacredHum" src="assets/sacred-hum.mp3" loop preload="auto"></audio>
+  <audio id="scrollChime" src="assets/scroll-chime.mp3" preload="auto"></audio>
 
-  <!-- 🌐 Navigation -->
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="library.html">Knowledge Library</a>
-    <a href="admin.html">Admin</a>
-  </nav>
-
-  <!-- 📜 Footer -->
-  <footer>
-    <p>© 2025 DivineTruthAscension — Created by Desmond McBride</p>
-  </footer>
-
-  <!-- JS -->
   <script src="script.js"></script>
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-<script>
-  // Netlify Identity UI logic
-  const loginBtn = document.getElementById("login-btn");
-  const logoutBtn = document.getElementById("logout-btn");
-
-  if (window.netlifyIdentity) {
-    netlifyIdentity.on("init", user => {
-      if (user) {
-        loginBtn.style.display = "none";
-        logoutBtn.style.display = "inline-block";
-      }
-    });
-
-    netlifyIdentity.on("login", user => {
-      loginBtn.style.display = "none";
-      logoutBtn.style.display = "inline-block";
-      window.location.reload();
-    });
-
-    netlifyIdentity.on("logout", () => {
-      loginBtn.style.display = "inline-block";
-      logoutBtn.style.display = "none";
-      window.location.reload();
-    });
-  }
-
-  loginBtn.addEventListener("click", () => netlifyIdentity.open("login"));
-  logoutBtn.addEventListener("click", () => netlifyIdentity.logout());
-</script>
 </body>
 </html>
