@@ -1,41 +1,35 @@
-const fetch = require("node-fetch");
+import { createClient } from '@supabase/supabase-js';
 
-exports.handler = async () => {
+export const handler = async (event, context) => {
   try {
-    const API = "https://api.netlify.com/api/v1/sites/87ef864e-40c3-4782-9b00-cdfa296e2ab8/forms";
-    const resp = await fetch(API, {
-      headers: { Authorization: `Bearer ${process.env.NETLIFY_AUTH_TOKEN}` }
-    });
-
-    const forms = await resp.json();
-
-    const knowledgeForm = forms.find(f => f.name === "knowledge-form");
-
-    if (!knowledgeForm) {
-      return { statusCode: 404, body: "Form not found" };
-    }
-
-    const subResp = await fetch(
-      `https://api.netlify.com/api/v1/forms/${knowledgeForm.id}/submissions`,
-      {
-        headers: { Authorization: `Bearer ${process.env.NETLIFY_AUTH_TOKEN}` }
-      }
+    // 🔑 Use environment variables (set in Netlify dashboard)
+    const supabase = createClient(
+      process.env.SUPABASE_URL,
+      process.env.SUPABASE_KEY
     );
 
-    const submissions = await subResp.json();
+    // 📖 Fetch all submissions from "knowledge_entries" table
+    const { data, error } = await supabase
+      .from('knowledge_entries')
+      .select('*')
+      .order('id', { ascending: false });
+
+    if (error) {
+      throw error;
+    }
 
     return {
       statusCode: 200,
-      body: JSON.stringify(
-        submissions.map(s => ({
-          title: s.data.title,
-          content: s.data.content,
-          link: s.data.link,
-          created_at: s.created_at
-        }))
-      )
+      body: JSON.stringify(data),
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json"
+      }
     };
   } catch (err) {
-    return { statusCode: 500, body: err.toString() };
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: err.message })
+    };
   }
 };

@@ -1,67 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Dashboard - Knowledge Library</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin – Knowledge Moderation</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="admin-dashboard">
-  <h1>Knowledge Library Admin</h1>
+<body>
+  <header>
+    <img src="assets/cosmic-mandala.png" alt="Cosmic Mandala" class="mandala-bg" />
+    <h1>🔑 Knowledge Moderation</h1>
+    <p>Review, approve, or reject wisdom shared by the collective ✨</p>
+  </header>
 
-  <!-- 🔐 Login -->
-  <div id="loginSection">
-    <input type="password" id="adminPassword" placeholder="Enter Admin Password">
-    <button onclick="login()">Login</button>
-  </div>
+  <main>
+    <section class="library-section">
+      <h2>📝 Pending Submissions</h2>
+      <div id="pending-list" class="knowledge-list">
+        <p class="loading">Loading pending wisdom...</p>
+      </div>
+    </section>
+  </main>
 
-  <!-- 📚 Submissions -->
-  <div id="dashboard" style="display:none;">
-    <h2>Pending Submissions</h2>
-    <ul id="submissionList"></ul>
-  </div>
+  <footer>
+    <p>⚡ Powered by Universal Source • Admin Access Only</p>
+  </footer>
 
   <script>
-    const ADMIN_PASSWORD = "SacredKey123"; // 🔑 change this in production
-
-    function login() {
-      const pass = document.getElementById("adminPassword").value;
-      if (pass === ADMIN_PASSWORD) {
-        document.getElementById("loginSection").style.display = "none";
-        document.getElementById("dashboard").style.display = "block";
-        loadSubmissions();
-      } else {
-        alert("Wrong password!");
-      }
-    }
-
-    async function loadSubmissions() {
-      const res = await fetch("/.netlify/functions/get-all-submissions");
+    async function fetchPending() {
+      const res = await fetch("/.netlify/functions/get-pending-knowledge");
       const data = await res.json();
-      const list = document.getElementById("submissionList");
-      list.innerHTML = "";
+
+      const container = document.getElementById("pending-list");
+      container.innerHTML = "";
+
+      if (!data.length) {
+        container.innerHTML = "<p>No pending wisdom 🌟</p>";
+        return;
+      }
 
       data.forEach(item => {
-        const li = document.createElement("li");
-        li.innerHTML = `
-          <strong>${item.title}</strong> - ${item.content}
-          <br><small>${item.link || ""}</small>
-          <br>Status: ${item.reviewed ? (item.approved ? "✅ Approved" : "❌ Rejected") : "⏳ Pending"}
-          <br>
-          <button onclick="review('${item.id}', true)">Approve</button>
-          <button onclick="review('${item.id}', false)">Reject</button>
+        const div = document.createElement("div");
+        div.classList.add("library-item");
+        div.innerHTML = `
+          <h3>${item.title}</h3>
+          <p>${item.content}</p>
+          <small>Submitted by ${item.author || "Anonymous"}</small>
+          <div class="admin-actions">
+            <button onclick="approve('${item.id}')">✅ Approve</button>
+            <button onclick="reject('${item.id}')">❌ Reject</button>
+          </div>
         `;
-        list.appendChild(li);
+        container.appendChild(div);
       });
     }
 
-    async function review(id, approve) {
+    async function approve(id) {
       await fetch("/.netlify/functions/approve-knowledge", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id, approve })
+        body: JSON.stringify({ id, approve: true }),
       });
-      loadSubmissions();
+      fetchPending();
     }
+
+    async function reject(id) {
+      await fetch("/.netlify/functions/approve-knowledge", {
+        method: "POST",
+        body: JSON.stringify({ id, approve: false }),
+      });
+      fetchPending();
+    }
+
+    fetchPending();
   </script>
 </body>
 </html>

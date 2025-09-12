@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DivineTruthAscension</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DivineTruthAscension - Knowledge Library</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- 🔥 Phoenix Soul Signature with Mandala -->
-  <header class="phoenix-header">
-    <div class="mandala-container">
-      <img src="assets/cosmic-mandala.png" alt="Cosmic Mandala Seal" class="mandala">
-      <img src="assets/PhoenixRise.png" alt="Phoenix Soul Signature" class="phoenix-image">
-    </div>
+  <!-- 🔥 Phoenix Soul Signature -->
+  <header>
+    <img src="assets/PhoenixRise.png" alt="Phoenix Soul Signature" class="phoenix-image">
     <h1>DivineTruthAscension</h1>
-    <p class="invocation">A Sanctuary for remembrance and breath ritual.</p>
+    <p class="invocation">A sanctuary for remembrance, breath ritual, and unity knowledge sharing.</p>
   </header>
 
+  <!-- 🌌 Cosmic Mandala -->
+  <section class="mandala-section">
+    <img src="assets/cosmic-mandala.png" alt="Cosmic Mandala" class="mandala-image">
+  </section>
+
   <!-- ✨ Breath Ritual Control -->
-  <button id="startBreath">Begin Breath Ritual</button>
+  <section class="ritual">
+    <button id="startBreath">Begin Breath Ritual</button>
+  </section>
 
   <!-- 🎶 Audio Layers -->
   <audio id="phoenixTone" src="assets/phoenix-hum.mp3" loop></audio>
@@ -28,7 +32,67 @@
   <audio id="droneSound" src="assets/cosmic-drone.mp3" loop></audio>
   <audio id="chimeSound" src="assets/cosmic-chime.mp3"></audio>
 
-  <!-- Link script -->
+  <!-- 📚 Knowledge Library -->
+  <section id="knowledge-library">
+    <h2>📚 Collective Knowledge Library</h2>
+    <p>Share and explore sacred wisdom — ancient and present. This is a space of unity and co-creation.</p>
+
+    <!-- Submission Form -->
+    <form name="knowledge-form" method="POST" data-netlify="true" class="knowledge-form">
+      <label>
+        Title:
+        <input type="text" name="title" required>
+      </label>
+
+      <label>
+        Knowledge Content:
+        <textarea name="content" rows="5" required></textarea>
+      </label>
+
+      <label>
+        Reference Link (optional):
+        <input type="url" name="link">
+      </label>
+
+      <button type="submit">✨ Contribute Knowledge</button>
+    </form>
+
+    <!-- Display Submissions -->
+    <div id="knowledge-list">
+      <h3>🌟 Shared Wisdom</h3>
+      <div id="submissions"></div>
+    </div>
+  </section>
+
+  <!-- Script -->
   <script src="script.js"></script>
+  <script>
+    // Fetch submissions from Netlify Function
+    async function loadSubmissions() {
+      try {
+        const res = await fetch("/.netlify/functions/get-submissions");
+        const data = await res.json();
+        const container = document.getElementById("submissions");
+
+        if (!data || data.length === 0) {
+          container.innerHTML = "<p>No contributions yet. Be the first to share wisdom ✨</p>";
+          return;
+        }
+
+        container.innerHTML = data.map(item => `
+          <div class="knowledge-item">
+            <h4>${item.title}</h4>
+            <p>${item.content}</p>
+            ${item.link ? `<a href="${item.link}" target="_blank">🔗 Reference</a>` : ""}
+            <span class="date">Shared on: ${new Date(item.created_at).toLocaleDateString()}</span>
+          </div>
+        `).join("");
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    loadSubmissions();
+  </script>
 </body>
 </html>
