@@ -44,5 +44,35 @@
 
   <!-- JS -->
   <script src="script.js"></script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  // Netlify Identity UI logic
+  const loginBtn = document.getElementById("login-btn");
+  const logoutBtn = document.getElementById("logout-btn");
+
+  if (window.netlifyIdentity) {
+    netlifyIdentity.on("init", user => {
+      if (user) {
+        loginBtn.style.display = "none";
+        logoutBtn.style.display = "inline-block";
+      }
+    });
+
+    netlifyIdentity.on("login", user => {
+      loginBtn.style.display = "none";
+      logoutBtn.style.display = "inline-block";
+      window.location.reload();
+    });
+
+    netlifyIdentity.on("logout", () => {
+      loginBtn.style.display = "inline-block";
+      logoutBtn.style.display = "none";
+      window.location.reload();
+    });
+  }
+
+  loginBtn.addEventListener("click", () => netlifyIdentity.open("login"));
+  logoutBtn.addEventListener("click", () => netlifyIdentity.logout());
+</script>
 </body>
 </html>

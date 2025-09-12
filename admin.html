@@ -1,77 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin – Knowledge Moderation</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knowledge Library Admin</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<<!-- 🔑 Identity Login/Logout -->
+<div id="auth-controls" class="auth-controls">
+  <button id="login-btn">Login</button>
+  <button id="logout-btn" style="display:none;">Logout</button>
+</div>
   <header>
-    <img src="assets/cosmic-mandala.png" alt="Cosmic Mandala" class="mandala-bg" />
-    <h1>🔑 Knowledge Moderation</h1>
-    <p>Review, approve, or reject wisdom shared by the collective ✨</p>
+    <h1>Admin Dashboard</h1>
+    <p>Review and approve submissions.</p>
   </header>
 
-  <main>
-    <section class="library-section">
-      <h2>📝 Pending Submissions</h2>
-      <div id="pending-list" class="knowledge-list">
-        <p class="loading">Loading pending wisdom...</p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>⚡ Powered by Universal Source • Admin Access Only</p>
-  </footer>
+  <section id="admin-section">
+    <h2>Pending Submissions</h2>
+    <div id="pending-list">
+      <p>Loading pending submissions...</p>
+    </div>
+  </section>
 
   <script>
-    async function fetchPending() {
-      const res = await fetch("/.netlify/functions/get-pending-knowledge");
-      const data = await res.json();
+    // Fetch all submissions (including unapproved)
+    async function loadPending() {
+      try {
+        const res = await fetch('/.netlify/functions/get-all-submissions');
+        const data = await res.json();
 
-      const container = document.getElementById("pending-list");
-      container.innerHTML = "";
+        const list = document.getElementById('pending-list');
+        list.innerHTML = '';
 
-      if (!data.length) {
-        container.innerHTML = "<p>No pending wisdom 🌟</p>";
-        return;
+        const pending = data.filter(item => !item.approved);
+
+        if (pending.length === 0) {
+          list.innerHTML = '<p>No pending submissions.</p>';
+          return;
+        }
+
+        pending.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'submission';
+          div.innerHTML = `
+            <h3>${item.title}</h3>
+            <p>${item.content}</p>
+            <small>By: ${item.author || 'Anonymous'} on ${new Date(item.created_at).toLocaleDateString()}</small>
+            <div class="actions">
+              <button onclick="approve('${item.id}')">Approve</button>
+              <button onclick="reject('${item.id}')">Reject</button>
+            </div>
+          `;
+          list.appendChild(div);
+        });
+      } catch (err) {
+        console.error(err);
+        document.getElementById('pending-list').innerHTML = '<p>Error loading submissions.</p>';
       }
-
-      data.forEach(item => {
-        const div = document.createElement("div");
-        div.classList.add("library-item");
-        div.innerHTML = `
-          <h3>${item.title}</h3>
-          <p>${item.content}</p>
-          <small>Submitted by ${item.author || "Anonymous"}</small>
-          <div class="admin-actions">
-            <button onclick="approve('${item.id}')">✅ Approve</button>
-            <button onclick="reject('${item.id}')">❌ Reject</button>
-          </div>
-        `;
-        container.appendChild(div);
-      });
     }
 
+    // Approve a submission
     async function approve(id) {
-      await fetch("/.netlify/functions/approve-knowledge", {
-        method: "POST",
-        body: JSON.stringify({ id, approve: true }),
-      });
-      fetchPending();
+      try {
+        const res = await fetch('/.netlify/functions/approve-knowledge', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, approved: true })
+        });
+
+        if (res.ok) {
+          alert('Submission approved!');
+          loadPending();
+        } else {
+          alert('Error approving submission.');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Error approving.');
+      }
     }
 
+    // Reject a submission (delete or mark rejected)
     async function reject(id) {
-      await fetch("/.netlify/functions/approve-knowledge", {
-        method: "POST",
-        body: JSON.stringify({ id, approve: false }),
-      });
-      fetchPending();
+      try {
+        const res = await fetch('/.netlify/functions/approve-knowledge', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, approved: false })
+        });
+
+        if (res.ok) {
+          alert('Submission rejected.');
+          loadPending();
+        } else {
+          alert('Error rejecting submission.');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Error rejecting.');
+      }
     }
 
-    fetchPending();
+    // Load pending submissions on page load
+    loadPending();
   </script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  const loginBtn = document.getElementById("login-btn");
+  const logoutBtn = document.getElementById("logout-btn");
+
+  if (window.netlifyIdentity) {
+    netlifyIdentity.on("init", user => {
+      if (user) {
+        loginBtn.style.display = "none";
+        logoutBtn.style.display = "inline-block";
+      }
+    });
+
+    netlifyIdentity.on("login", user => {
+      loginBtn.style.display = "none";
+      logoutBtn.style.display = "inline-block";
+      window.location.reload();
+    });
+
+    netlifyIdentity.on("logout", () => {
+      loginBtn.style.display = "inline-block";
+      logoutBtn.style.display = "none";
+      window.location.reload();
+    });
+  }
+
+  loginBtn.addEventListener("click", () => netlifyIdentity.open("login"));
+  logoutBtn.addEventListener("click", () => netlifyIdentity.logout());
+</script>
 </body>
 </html>

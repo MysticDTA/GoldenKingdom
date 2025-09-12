@@ -1,2 +1,8 @@
 [build]
   functions = "netlify/functions"
+
+[[redirects]]
+  from = "/.netlify/functions/approve-knowledge"
+  to = "/.netlify/functions/require-admin"
+  status = 200
+  force = true
