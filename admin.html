@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - Knowledge Library</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-dashboard">
+  <h1>Knowledge Library Admin</h1>
+
+  <!-- 🔐 Login -->
+  <div id="loginSection">
+    <input type="password" id="adminPassword" placeholder="Enter Admin Password">
+    <button onclick="login()">Login</button>
+  </div>
+
+  <!-- 📚 Submissions -->
+  <div id="dashboard" style="display:none;">
+    <h2>Pending Submissions</h2>
+    <ul id="submissionList"></ul>
+  </div>
+
+  <script>
+    const ADMIN_PASSWORD = "SacredKey123"; // 🔑 change this in production
+
+    function login() {
+      const pass = document.getElementById("adminPassword").value;
+      if (pass === ADMIN_PASSWORD) {
+        document.getElementById("loginSection").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+        loadSubmissions();
+      } else {
+        alert("Wrong password!");
+      }
+    }
+
+    async function loadSubmissions() {
+      const res = await fetch("/.netlify/functions/get-all-submissions");
+      const data = await res.json();
+      const list = document.getElementById("submissionList");
+      list.innerHTML = "";
+
+      data.forEach(item => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <strong>${item.title}</strong> - ${item.content}
+          <br><small>${item.link || ""}</small>
+          <br>Status: ${item.reviewed ? (item.approved ? "✅ Approved" : "❌ Rejected") : "⏳ Pending"}
+          <br>
+          <button onclick="review('${item.id}', true)">Approve</button>
+          <button onclick="review('${item.id}', false)">Reject</button>
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    async function review(id, approve) {
+      await fetch("/.netlify/functions/approve-knowledge", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, approve })
+      });
+      loadSubmissions();
+    }
+  </script>
+</body>
+</html>
