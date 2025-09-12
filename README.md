@@ -1,22 +1,30 @@
-# 🌌 DivineTruthAscension
+# 🌌 DivineTruthAscension (DTA)
 
-**DivineTruthAscension (DTA)** is a **Spiritual Social Web Platform** — a sanctuary for remembrance, breath ritual, and ascension.  
-It blends **cosmic design**, **sacred numerology**, and **interactive ritual features** into a living digital temple.
-
----
-
-## ✨ Features
-- 🔥 **Phoenix Breath Ritual** → animated Phoenix reacts to breath input (microphone visualization + sound modulation).  
-- 🎶 **Layered Cosmic Audio** → fire crackles, ocean waves, cosmic drone, and chimes for immersive rituals.  
-- 🌐 **Web-first Design** → works on mobile + desktop, optimized for Netlify hosting.  
-- ⚡ **Expandable Platform** → designed for community, spiritual tools, and sovereignty activations.  
+![Netlify Status](https://api.netlify.com/api/v1/badges/87ef864e-40c3-4782-9b00-cdfa296e2ab8/deploy-status)
+![License](https://img.shields.io/badge/License-SSSL--v1.0-blueviolet?style=for-the-badge&logo=open-source-initiative)
+![Built with Love](https://img.shields.io/badge/Built%20with-%F0%9F%92%96%20Divine%20Source-pink?style=for-the-badge)
 
 ---
 
-## 🚀 Getting Started
+## ✨ Overview
+**DivineTruthAscension (DTA)** is a **Spiritual Social Web Platform** —  
+a sanctuary for remembrance, sovereignty, and awakening.  
 
-### Local Development
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/MysticDTA/DTA.git
-   cd DTA
+It blends **ritual breathwork, sound, and sacred imagery**  
+into a digital temple for the collective.  
+
+---
+
+## 🚀 Live Site
+🌐 [Visit the Temple on Netlify](https://divinetruthascension.netlify.app)
+
+---
+
+## 🛠️ Setup
+```bash
+# Clone the temple
+git clone https://github.com/MysticDTA/DTA.git
+cd DTA
+
+# Open locally
+xdg-open index.html   # or just open in your browser
