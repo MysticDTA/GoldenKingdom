@@ -1,7 +1,37 @@
 [build]
   functions = "netlify/functions"
+
+# Approve knowledge
 [[redirects]]
-  from = "/.netlify/functions/approve-knowledge"
-  to = "/.netlify/functions/require-admin"
+  from = "/api/approve-knowledge"
+  to = "/.netlify/functions/approve-knowledge"
+  status = 200
+  force = true
+
+# Get submissions
+[[redirects]]
+  from = "/api/get-submissions"
+  to = "/.netlify/functions/get-submissions"
+  status = 200
+  force = true
+
+# Get all submissions
+[[redirects]]
+  from = "/api/get-all-submissions"
+  to = "/.netlify/functions/get-all-submissions"
+  status = 200
+  force = true
+
+# Add submissions
+[[redirects]]
+  from = "/api/add-submissions"
+  to = "/.netlify/functions/add-submissions"
+  status = 200
+  force = true
+
+# Submit knowledge
+[[redirects]]
+  from = "/api/submit-knowledge"
+  to = "/.netlify/functions/submit-knowledge"
   status = 200
   force = true

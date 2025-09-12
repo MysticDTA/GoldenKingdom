@@ -1,40 +1,73 @@
-const enterBtn = document.getElementById("enterButton");
-const mandala = document.getElementById("mandala");
-const phoenix = document.getElementById("phoenix");
-const aum = document.getElementById("aum");
-const sacredHum = document.getElementById("sacredHum");
-const scrollChime = document.getElementById("scrollChime");
+// Handle knowledge submission
+async function submitKnowledge(event) {
+  event.preventDefault();
 
-enterBtn.addEventListener("click", () => {
-  // Start eternal hum
-  sacredHum.volume = 0.4;
-  sacredHum.play();
+  const title = document.getElementById("knowledge-title").value;
+  const content = document.getElementById("knowledge-content").value;
 
-  const lines = document.querySelectorAll(".scroll-line");
-
-  lines.forEach((line, index) => {
-    setTimeout(() => {
-      line.style.opacity = "1";
-      line.style.transform = "translateY(0)";
-
-      // Animate visuals
-      aum.classList.add("highlight");
-      mandala.classList.add("radiate");
-      phoenix.classList.add("flare");
-
-      // Play chime
-      if (scrollChime) {
-        scrollChime.currentTime = 0;
-        scrollChime.volume = 0.6;
-        scrollChime.play();
-      }
-
-      // Reset highlight
-      setTimeout(() => {
-        aum.classList.remove("highlight");
-        mandala.classList.remove("radiate");
-        phoenix.classList.remove("flare");
-      }, 1200);
-    }, index * 2000);
+  const response = await fetch("/api/submit-knowledge", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ title, content }),
   });
-});
+
+  const result = await response.json();
+  alert(result.message || "Submission complete!");
+}
+
+// Fetch all approved knowledge
+async function loadKnowledge() {
+  const response = await fetch("/api/get-submissions");
+  const knowledge = await response.json();
+
+  const container = document.getElementById("knowledge-container");
+  container.innerHTML = "";
+
+  knowledge.forEach((item) => {
+    const div = document.createElement("div");
+    div.className = "knowledge-card";
+    div.innerHTML = `
+      <h3>${item.title}</h3>
+      <p>${item.content}</p>
+    `;
+    container.appendChild(div);
+  });
+}
+
+// Fetch all submissions (admin only)
+async function loadAllSubmissions() {
+  const response = await fetch("/api/get-all-submissions");
+  const submissions = await response.json();
+
+  const container = document.getElementById("submissions-container");
+  container.innerHTML = "";
+
+  submissions.forEach((item) => {
+    const div = document.createElement("div");
+    div.className = "submission-card";
+    div.innerHTML = `
+      <h3>${item.title}</h3>
+      <p>${item.content}</p>
+      <button onclick="approveKnowledge('${item.id}')">Approve</button>
+    `;
+    container.appendChild(div);
+  });
+}
+
+// Approve a submission
+async function approveKnowledge(id) {
+  const response = await fetch("/api/approve-knowledge", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id }),
+  });
+
+  const result = await response.json();
+  alert(result.message || "Approved!");
+  loadAllSubmissions();
+}
+
+// Run auto-load on library page
+if (document.getElementById("knowledge-container")) {
+  loadKnowledge();
+}
