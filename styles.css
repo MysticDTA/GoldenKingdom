@@ -1,79 +1,76 @@
-/* 🌌 Cosmic Background */
+/* General Page Styling */
 body {
   margin: 0;
   padding: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #f0f8ff;
-  background: radial-gradient(circle at center, #0a0a1a 0%, #000 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  background: radial-gradient(circle at center, #0a0a1f, #000);
+  color: #fff;
 }
 
-/* 🔥 Header */
-header {
-  margin-bottom: 2rem;
+/* Header Section */
+.phoenix-header {
+  margin-top: 40px;
 }
 
-header h1 {
+h1 {
   font-size: 2.5rem;
-  letter-spacing: 2px;
-  text-shadow: 0 0 15px #6cf, 0 0 30px #39f;
+  margin: 20px 0 10px;
+  color: #ffd700;
+  text-shadow: 0 0 15px #ff6, 0 0 30px #f90;
 }
 
-header .invocation {
-  font-size: 1rem;
-  opacity: 0.85;
-  margin-top: 0.5rem;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.5;
+.invocation {
+  font-size: 1.2rem;
+  color: #ccc;
+  text-shadow: 0 0 5px #6cf;
 }
 
-/* 🕊️ Phoenix Image */
+/* Mandala & Phoenix Container */
+.mandala-container {
+  position: relative;
+  display: inline-block;
+}
+
+.mandala {
+  width: 350px;
+  max-width: 80vw;
+  opacity: 0.65;
+  filter: drop-shadow(0 0 20px #6cf);
+  animation: mandala-spin 60s linear infinite;
+}
+
 .phoenix-image {
-  max-width: 250px;
-  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 220px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 0 20px #6cf;
   border-radius: 12px;
-  margin-bottom: 1rem;
 }
 
-/* ✨ Ritual Section */
-.ritual-section {
-  margin-top: 1rem;
+/* Mandala Spin Animation */
+@keyframes mandala-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-#startBreath {
-  padding: 1rem 2rem;
+/* Breath Ritual Button */
+button#startBreath {
+  margin-top: 30px;
+  padding: 12px 25px;
   font-size: 1.2rem;
-  font-weight: bold;
   border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  background: linear-gradient(135deg, #39f, #6cf, #39f);
+  border-radius: 25px;
+  background: linear-gradient(45deg, #6cf, #09f, #6cf);
   color: #fff;
-  box-shadow: 0 0 20px #39f, 0 0 40px #6cf;
-  transition: all 0.3s ease;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-#startBreath:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 30px #6cf, 0 0 60px #39f;
-}
-
-/* 🎤 Warning Message */
-.warning {
-  margin-top: 1rem;
-  color: #ff7675;
-  font-size: 0.9rem;
-  text-shadow: 0 0 10px rgba(255, 118, 117, 0.8);
-}
-
-.hidden {
-  display: none;
+button#startBreath:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #6cf;
 }
