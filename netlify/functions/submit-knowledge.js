@@ -1,30 +1,28 @@
-import { createClient } from "@supabase/supabase-js";
-
-const { createClient } = require('@supabase/supabase-js');
+import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
-  process.env.SUPABASE_KEY
+  process.env.SUPABASE_SERVICE_KEY
 );
 
-exports.handler = async (event) => {
+export async function handler(event) {
   try {
-    const { title, content, author } = JSON.parse(event.body);
+    const body = JSON.parse(event.body);
 
     const { data, error } = await supabase
-      .from('knowledge_library')
-      .insert([{ title, content, author, approved: false }]);
+      .from('knowledge')
+      .insert([{
+        title: body.title,
+        content: body.content,
+        author: body.author
+      }]);
 
-    if (error) throw error;
+    if (error) {
+      return { statusCode: 400, body: JSON.stringify({ error: error.message }) };
+    }
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ success: true, data }),
-    };
+    return { statusCode: 200, body: JSON.stringify({ success: true, data }) };
   } catch (err) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ success: false, error: err.message }),
-    };
+    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
   }
-};
+}
