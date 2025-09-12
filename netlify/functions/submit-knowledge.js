@@ -1,28 +1,45 @@
+// netlify/functions/submit-knowledge.js
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_KEY
+  process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
 export async function handler(event) {
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ error: 'Method not allowed' }),
+    };
+  }
+
   try {
-    const body = JSON.parse(event.body);
+    const { title, author, content } = JSON.parse(event.body);
 
-    const { data, error } = await supabase
-      .from('knowledge')
-      .insert([{
-        title: body.title,
-        content: body.content,
-        author: body.author
-      }]);
-
-    if (error) {
-      return { statusCode: 400, body: JSON.stringify({ error: error.message }) };
+    if (!title || !author || !content) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: 'Missing required fields' }),
+      };
     }
 
-    return { statusCode: 200, body: JSON.stringify({ success: true, data }) };
+    // Insert into Supabase
+    const { data, error } = await supabase
+      .from('knowledge_library')
+      .insert([{ title, author, content, approved: false }]);
+
+    if (error) throw error;
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: 'Submission received', data }),
+    };
   } catch (err) {
-    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
+    console.error('Error submitting knowledge:', err.message);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Failed to submit knowledge' }),
+    };
   }
 }
