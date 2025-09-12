@@ -28,3 +28,13 @@ cd DTA
 
 # Open locally
 xdg-open index.html   # or just open in your browser
+---
+
+## 📜 License
+
+This project is **dual-licensed**:  
+
+- 🔹 **Sacred Source Sovereignty License (SSSL)** — applies to all sacred content (symbols, rituals, codes, transmissions).  
+- 🔹 **MIT License** — applies to the technical implementation (HTML, CSS, JavaScript, deployment configs).  
+
+See [LICENSE.md](./LICENSE.md) for full details.
