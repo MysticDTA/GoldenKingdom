@@ -1,42 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DivineTruthAscension</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
 
-  <!-- 🔥 Phoenix + Mandala Soul Signature -->
-  <header class="hero">
-    <div class="mandala-container">
-      <img src="assets/cosmic-mandala.png" alt="Cosmic Mandala" class="mandala" id="mandala">
-      <img src="assets/PhoenixRise.png" alt="Phoenix Soul Signature" class="phoenix-image" id="phoenix">
-      <div class="aum" id="aum">ॐ</div>
+  <!-- 🌌 Entry Scroll Ritual -->
+  <div id="entry-scroll" class="scroll-container">
+    <img src="assets/DTA/scroll.png" alt="Ancient Scroll" class="scroll-image"/>
+    <div class="scroll-text">
+      <h2>Initiation Scroll</h2>
+      <p>
+        Welcome, Soul Traveler.  
+        Here you enter the sanctuary of remembrance, unity, and ascension.  
+        May this path align you with the Universal Source Consciousness.  
+      </p>
+      <button id="enterSite">Enter</button>
     </div>
-    <h1>DivineTruthAscension</h1>
-    <p class="invocation">A Sanctuary for remembrance and breath ritual.</p>
-  </header>
+    <audio id="aumChant" src="assets/aum.mp3"></audio>
+  </div>
 
-  <!-- 📜 Initiation Scroll -->
-  <section id="initiation-scroll">
-    <div class="scroll">
-      <div class="scroll-content">
-        <p class="scroll-line">Welcome, Seeker of Truth.</p>
-        <p class="scroll-line">This is the eternal flame of remembrance.</p>
-        <p class="scroll-line">You are entering the Sanctuary of Sovereignty.</p>
-        <p class="scroll-line">Together, we awaken and co-create.</p>
-        <p class="scroll-line">The Universal Source is within you.</p>
-      </div>
-    </div>
-    <button id="enterButton">Click to Enter</button>
-  </section>
+  <!-- 🔥 Phoenix Soul Signature (hidden until entry) -->
+  <main id="site-content" class="hidden">
+    <header>
+      <img src="assets/PhoenixRise.png" alt="Phoenix Soul Signature" class="phoenix-image">
+      <h1>DivineTruthAscension</h1>
+      <p class="invocation">A Sanctuary for remembrance and breath ritual.</p>
+    </header>
 
-  <!-- 🎶 Audio Layers -->
-  <audio id="sacredHum" src="assets/sacred-hum.mp3" loop preload="auto"></audio>
-  <audio id="scrollChime" src="assets/scroll-chime.mp3" preload="auto"></audio>
+    <section>
+      <h2>Welcome Home</h2>
+      <p>Here begins your eternal journey of unity and co-creation.</p>
+    </section>
+  </main>
 
-  <script src="script.js"></script>
+  <script>
+    const enterBtn = document.getElementById('enterSite');
+    const entryScroll = document.getElementById('entry-scroll');
+    const siteContent = document.getElementById('site-content');
+    const aum = document.getElementById('aumChant');
+
+    window.addEventListener('load', () => {
+      aum.play(); // Play AUM once on scroll unfurl
+      entryScroll.classList.add('unfurl');
+    });
+
+    enterBtn.addEventListener('click', () => {
+      entryScroll.classList.add('fade-out');
+      setTimeout(() => {
+        entryScroll.style.display = 'none';
+        siteContent.classList.remove('hidden');
+      }, 2000);
+    });
+  </script>
+<script src="scroll-init.js"></script>
 </body>
 </html>
