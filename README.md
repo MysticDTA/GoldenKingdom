@@ -3,7 +3,7 @@
 ![Netlify Status](https://api.netlify.com/api/v1/badges/87ef864e-40c3-4782-9b00-cdfa296e2ab8/deploy-status)
 ![License](https://img.shields.io/badge/License-SSSL--v1.0-blueviolet?style=for-the-badge&logo=open-source-initiative)
 ![Built with Love](https://img.shields.io/badge/Built%20with-%F0%9F%92%96%20Divine%20Source-pink?style=for-the-badge)
-
+[![License: SSSL + MIT](https://img.shields.io/badge/license-SSSL%20%2B%20MIT-blue.svg)](./LICENSE.md)
 ---
 
 ## ✨ Overview
