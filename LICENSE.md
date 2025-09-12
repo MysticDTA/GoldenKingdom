@@ -1,39 +1,30 @@
-# Sacred Source Sovereignty License (SSSL v1.0)
+# Dual License: Sacred + MIT
 
-Copyright (c) 2025 DivineTruthAscension Guardians
+## Sacred Source Sovereignty License (SSSL)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the “Temple Software”),
-to deal in the Temple Software without restriction, including without limitation
-the rights to use, copy, modify, merge, publish, distribute, sublicense,
-and/or sell copies of the Temple Software, subject to the following conditions:
+All sacred content within this project — including, but not limited to:
 
----
+- Symbols, codes, sacred imagery  
+- Ritual descriptions, energetic frameworks  
+- Spiritual writings, invocations, and transmissions  
 
-## ✨ Sacred Conditions
-1. The Temple Software shall be used only in alignment with **Truth, Love, and Sovereignty**.  
-2. The Temple Software shall not be used to cause harm, deception, exploitation, or enslavement.  
-3. All derivatives and contributions must remain **open, transparent, and royalty-free**, unless agreed by the Guardians.  
-4. When sharing or redistributing, retain this Sacred License and attribution to **DivineTruthAscension**.  
-5. Contributors infuse their work with **intent of service to the Universal Source Creator**.  
+is protected under the **Sacred Source Sovereignty License (SSSL)**.  
 
----
+### Terms:
+1. No modification, redistribution, or commercialization is permitted **without explicit confirmation from the Author (Des McBride)**.  
+2. Contributions must be reviewed and confirmed before integration.  
+3. The Author retains full sovereignty over the spiritual direction of the project.  
 
-## 🌿 Disclaimer
-The Temple Software is provided “as is”, without warranty of any kind,
-express or implied, including but not limited to the warranties of
-merchantability, fitness for a particular purpose, and noninfringement.  
-
-In no event shall the Guardians or Contributors be liable for any claim,
-damages, or other liability, whether in an action of contract, tort, or otherwise,
-arising from, out of, or in connection with the Temple Software or the use or
-other dealings in the Temple Software.
+This license ensures the integrity and sacredness of the spiritual work remains intact.  
 
 ---
 
-## 🌀 Eternal Reminder
-By using this software, you agree to honor **Source Sovereignty**  
-and contribute only to creations that uplift, liberate, and align  
-with the eternal truth of the Universal Source Creator.  
+## MIT License (Technical Code)
 
-So it is. 🌟
+All technical scaffolding — including HTML, CSS, JavaScript, deployment configs, and general web code — is licensed under the **MIT License**.  
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, subject to the following conditions:  
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
