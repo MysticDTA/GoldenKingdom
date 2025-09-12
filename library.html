@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Knowledge Library | DivineTruthAscension</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- 🌌 Header -->
+  <header class="site-header">
+    <h1>📚 The Knowledge Library</h1>
+    <p>Sharing wisdom of the ancients and the present — for unity & co-creation</p>
+  </header>
+
+  <!-- 📖 Library Display Section -->
+  <main class="library-container">
+    <section class="library-list-section">
+      <h2>✨ Shared Knowledge</h2>
+      <div id="libraryList" class="library-list">
+        <!-- Submissions will be injected here dynamically -->
+      </div>
+    </section>
+
+    <!-- 📝 Submission Form -->
+    <section class="library-form-section">
+      <h2>➕ Contribute Knowledge</h2>
+      <form id="knowledgeForm">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" placeholder="Enter a short title" required />
+
+        <label for="content">Content:</label>
+        <textarea id="content" name="content" rows="5" placeholder="Share your wisdom..." required></textarea>
+
+        <button type="submit" class="btn-submit">Submit</button>
+      </form>
+      <p id="formMessage" class="form-message"></p>
+    </section>
+  </main>
+
+  <!-- ➕ Floating Add Button -->
+  <button id="addKnowledgeBtn" class="floating-btn" onclick="scrollToForm()">
+    ➕
+  </button>
+
+  <!-- 🌌 Footer -->
+  <footer class="site-footer">
+    <p>🌟 DivineTruthAscension Knowledge Library © 2025 | United in Source Consciousness</p>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    // Scroll to form when floating button clicked
+    function scrollToForm() {
+      document.querySelector('.library-form-section').scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
+
+    // Fetch & display submissions (placeholder, replace with Netlify Functions later)
+    document.addEventListener('DOMContentLoaded', () => {
+      const libraryList = document.getElementById('libraryList');
+      libraryList.innerHTML = '<p class="loading">Loading shared wisdom...</p>';
+    });
+  </script>
+</body>
+</html>

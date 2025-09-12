@@ -1,76 +1,164 @@
-/* General Page Styling */
-body {
+/* 🌌 General Reset */
+* {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background: radial-gradient(circle at top, #0a0a1a, #000);
+  color: #e6e6f0;
+  padding-bottom: 100px;
+}
+
+/* 🌌 Header */
+.site-header {
   text-align: center;
-  background: radial-gradient(circle at center, #0a0a1f, #000);
-  color: #fff;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1a1a3d, #0a0a1a);
+  border-bottom: 2px solid #444;
 }
 
-/* Header Section */
-.phoenix-header {
-  margin-top: 40px;
+.site-header h1 {
+  font-size: 2.2rem;
+  color: #6cf;
 }
 
-h1 {
-  font-size: 2.5rem;
-  margin: 20px 0 10px;
-  color: #ffd700;
-  text-shadow: 0 0 15px #ff6, 0 0 30px #f90;
-}
-
-.invocation {
-  font-size: 1.2rem;
+.site-header p {
+  margin-top: 0.5rem;
+  font-size: 1rem;
   color: #ccc;
-  text-shadow: 0 0 5px #6cf;
 }
 
-/* Mandala & Phoenix Container */
-.mandala-container {
-  position: relative;
-  display: inline-block;
+/* 📖 Library Container */
+.library-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
 }
 
-.mandala {
-  width: 350px;
-  max-width: 80vw;
-  opacity: 0.65;
-  filter: drop-shadow(0 0 20px #6cf);
-  animation: mandala-spin 60s linear infinite;
+/* 📖 Knowledge List */
+.library-list-section h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #4af;
+  text-align: center;
 }
 
-.phoenix-image {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 220px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0 20px #6cf;
+.library-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.library-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #444;
+  padding: 1rem;
   border-radius: 12px;
+  box-shadow: 0 0 10px rgba(108, 204, 255, 0.2);
 }
 
-/* Mandala Spin Animation */
-@keyframes mandala-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.library-item h3 {
+  margin-bottom: 0.5rem;
+  color: #6cf;
 }
 
-/* Breath Ritual Button */
-button#startBreath {
-  margin-top: 30px;
-  padding: 12px 25px;
-  font-size: 1.2rem;
+.library-item p {
+  color: #eee;
+  font-size: 0.95rem;
+}
+
+/* 📝 Submission Form */
+.library-form-section {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background: rgba(20, 20, 40, 0.9);
+  border: 1px solid #333;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(108, 204, 255, 0.15);
+}
+
+.library-form-section h2 {
+  margin-bottom: 1rem;
+  color: #6cf;
+  text-align: center;
+}
+
+#knowledgeForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#knowledgeForm label {
+  font-weight: bold;
+  color: #ccc;
+}
+
+#knowledgeForm input,
+#knowledgeForm textarea {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #111;
+  color: #fff;
+  resize: vertical;
+}
+
+.btn-submit {
+  padding: 0.8rem;
+  background: linear-gradient(135deg, #6cf, #4af);
   border: none;
-  border-radius: 25px;
-  background: linear-gradient(45deg, #6cf, #09f, #6cf);
+  border-radius: 8px;
+  font-weight: bold;
   color: #fff;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.3s ease;
 }
 
-button#startBreath:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px #6cf;
+.btn-submit:hover {
+  background: linear-gradient(135deg, #4af, #6cf);
+  box-shadow: 0 0 12px #6cf;
+}
+
+.form-message {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #6cf;
+}
+
+/* ➕ Floating Add Button */
+.floating-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #6cf, #4af);
+  color: #fff;
+  font-size: 1.8rem;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  z-index: 1000;
+}
+
+.floating-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 14px #6cf;
+}
+
+/* 🌌 Footer */
+.site-footer {
+  text-align: center;
+  padding: 1rem;
+  background: #0a0a1a;
+  border-top: 1px solid #222;
+  font-size: 0.85rem;
+  color: #777;
 }
