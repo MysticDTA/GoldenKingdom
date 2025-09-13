@@ -1,10 +1,36 @@
 [build]
-  functions = "netlify/functions"
-  publish = "."
+  publish = "/"
+  functions = "functions"
+  # No build command needed for plain HTML/CSS/JS
 
-# Redirects (optional, but good for API endpoints)
+# Redirect API calls to Netlify functions
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
   force = true
+
+# Optional: caching rules for assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+# Environment variables for Supabase (set these in Netlify dashboard)
+# Do NOT commit keys to GitHub
+[build.environment]
+  SUPABASE_URL = ""
+  SUPABASE_ANON_KEY = ""
+  SUPABASE_SERVICE_ROLE_KEY = ""
+
+# Optional: redirects for Mystic Seal export
+[[redirects]]
+  from = "/MysticSeal.png"
+  to = "/sealCanvas.png"
+  status = 200
+  force = false
