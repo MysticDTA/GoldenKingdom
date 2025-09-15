@@ -1,4 +1,9 @@
 [build]
-publish = "."
-functions = "netlify/functions"
-command = ""
+  publish = "public"
+  command = "echo '🧿 No build step required — deploying static sanctuary.'"
+
+[functions]
+  directory = "netlify/functions"
+
+[dev]
+  autoLaunch = false
