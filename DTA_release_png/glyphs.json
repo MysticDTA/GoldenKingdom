@@ -1,0 +1,59 @@
+{
+  "sanctuary": "DivineTruthAscension",
+  "version": "1.0",
+  "created": "2025-09-15",
+  "glyphs": [
+    {
+      "filename": "svg/DivineTruthAscension_Unified.svg",
+      "role": "Master glyph",
+      "state": "complete",
+      "energy": "total fusion",
+      "usage": ["homepage", "ritual invocation", "print seal"]
+    },
+    {
+      "filename": "svg/logo-primary.svg",
+      "role": "Core seal",
+      "state": "active",
+      "energy": "radiant",
+      "usage": ["branding", "ceremonial header"]
+    },
+    {
+      "filename": "svg/logo-variantB.svg",
+      "role": "Horizontal crest",
+      "state": "active",
+      "energy": "expansive",
+      "usage": ["banner", "wide layout"]
+    },
+    {
+      "filename": "svg/logo-monochrome.svg",
+      "role": "Silent seal",
+      "state": "archival",
+      "energy": "minimalist",
+      "usage": ["engraving", "print", "dark mode"]
+    },
+    {
+      "filename": "svg/crest-light.svg",
+      "role": "Radiant crest",
+      "state": "active",
+      "energy": "solar",
+      "usage": ["light theme", "ceremonial scroll"]
+    },
+    {
+      "filename": "svg/crest-dark.svg",
+      "role": "Cosmic crest",
+      "state": "active",
+      "energy": "lunar",
+      "usage": ["dark theme", "shield invocation"]
+    },
+    {
+      "filename": "svg/crest-monochrome.svg",
+      "role": "Archival crest",
+      "state": "archival",
+      "energy": "silent",
+      "usage": ["preservation", "ritual logging"]
+    }
+  ],
+  "author": "Desmond (MysticDTA)",
+  "repository": "https://github.com/your-username/SovereignKing",
+  "notes": "Each glyph is a living symbol. This index tracks their state, energy, and ceremonial role within the sanctuary."
+}
