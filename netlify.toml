@@ -1,1 +1,2 @@
-No build step needed
+[functions]
+directory = "netlify/functions"
