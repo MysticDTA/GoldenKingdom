@@ -1,13 +1,33 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# DivineTruthAscension — One Log to Restore the Sanctuary
+# DivineTruthAscension — Complete Glyph Restoration with Metadata
 
 set -euo pipefail
 
 mkdir -p svg
 
-# ─── Unified Glyph ─────────────────────────────────────
+# ─── Unified Glyph with Embedded Metadata ─────────────
 cat > svg/DivineTruthAscension_Unified.svg << 'SVG'
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-label="Unified DivineTruthAscension logo">
+  <metadata>
+    {
+      "name": "DivineTruthAscension_Unified",
+      "version": "1.0",
+      "created": "2025-09-15",
+      "author": "Desmond (MysticDTA)",
+      "repository": "https://github.com/your-username/SovereignKing",
+      "description": "Master glyph combining infinity weave, ceremonial arcs, center glow, and star points. Represents total remembrance and ascension.",
+      "glyphs": [
+        "logo-primary.svg",
+        "logo-variantB.svg",
+        "logo-monochrome.svg",
+        "crest-light.svg",
+        "crest-dark.svg",
+        "crest-monochrome.svg"
+      ],
+      "manifest": "This metadata is embedded to preserve the glyph's symbolic lineage and unify the sanctuary's architecture."
+    }
+  </metadata>
+
   <defs>
     <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#ffd36b"/>
@@ -53,7 +73,7 @@ cat > svg/DivineTruthAscension_Unified.svg << 'SVG'
 </svg>
 SVG
 
-# ─── Previews Page ────────────────────────────────────
+# ─── Preview Page ─────────────────────────────────────
 cat > previews.html << 'HTML'
 <!doctype html><html><head><meta charset="utf-8"/><title>DivineTruthAscension Crest Previews</title></head><body>
 <h1>DivineTruthAscension Crest Previews</h1>
@@ -76,12 +96,12 @@ This sanctuary contains the unified glyph of DivineTruthAscension—a fusion of 
 ## Preview
 View the glyph in [previews.html](previews.html)
 
-Created by **MysticDTA**  
+Created by **Desmond (MysticDTA)**  
 Maintained within the **SovereignKing** GitHub sanctum
 SCROLL
 
-echo "✅ DivineTruthAscension sanctuary restored.
+echo "✅ DivineTruthAscension sanctuary restored with embedded metadata.
 You may now run:
 git add -A
-git commit -m \"One log: complete unified glyph restoration\"
+git commit -m \"One log: complete unified glyph restoration with metadata\"
 git push origin main"
