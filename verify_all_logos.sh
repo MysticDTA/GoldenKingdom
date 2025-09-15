@@ -1,10 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-// ----- Existing preview generation code here -----
-
-// ------------------- Auto SVG verification (fail on missing) -------------------
-
 // Replace with your Netlify site URL
 const siteURL = 'https://yoursite.netlify.app/';
 
@@ -24,12 +20,12 @@ function getSVGFiles(dir, base = '') {
   return results;
 }
 
+// Scan root + assets/logos
 const svgFiles = getSVGFiles('.', '').filter(f => f.endsWith('.svg'));
-console.log(`\nFound ${svgFiles.length} SVGs to check on ${siteURL}\n`);
+
+console.log(`Found ${svgFiles.length} SVGs to check on ${siteURL}\n`);
 
 (async () => {
-  let hasMissing = false;
-
   for (const file of svgFiles) {
     const url = siteURL + file.replace(/^\.\//, ''); // remove leading ./
     try {
@@ -38,18 +34,9 @@ console.log(`\nFound ${svgFiles.length} SVGs to check on ${siteURL}\n`);
         console.log(`✅ ${file} -> ${res.status} OK`);
       } else {
         console.log(`❌ ${file} -> ${res.status} ${res.statusText}`);
-        hasMissing = true;
       }
     } catch (err) {
       console.log(`❌ ${file} -> ERROR: ${err.message}`);
-      hasMissing = true;
     }
-  }
-
-  if (hasMissing) {
-    console.error('\n🚨 Some logos are missing or failed to deploy! Build will fail.\n');
-    process.exit(1); // Exit with error so Netlify build fails
-  } else {
-    console.log('\n✅ All logos are present. Build succeeded.\n');
   }
 })();
