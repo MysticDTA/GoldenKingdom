@@ -9,15 +9,23 @@ exports.handler = async () => {
     const glyphFiles = files.filter(file => file.endsWith('.json'));
 
     const manifest = glyphFiles.map(file => {
-      const data = fs.readFileSync(path.join(publicPath, file), 'utf8');
-      const parsed = JSON.parse(data);
+      const baseName = file.replace('.json', '');
+      const jsonPath = path.join(publicPath, file);
+      const svgPath = path.join(publicPath, `${baseName}.svg`);
+
+      const lineage = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+      const svg = fs.existsSync(svgPath)
+        ? fs.readFileSync(svgPath, 'utf8')
+        : null;
+
       return {
-        name: parsed.name || file.replace('.json', ''),
-        description: parsed.description || "No description provided.",
-        geometry: parsed.geometry || null,
-        aura: parsed.aura || null,
-        invocationPath: parsed.metadata?.invocationPath || `/public/${file.replace('.json', '.svg')}`,
-        lastUpdated: parsed.metadata?.lastUpdated || null
+        name: lineage.name || baseName,
+        description: lineage.description || "No description provided.",
+        geometry: lineage.geometry || null,
+        aura: lineage.aura || null,
+        invocationPath: `/public/${baseName}.svg`,
+        lastUpdated: lineage.metadata?.lastUpdated || null,
+        svgPreview: svg
       };
     });
 
