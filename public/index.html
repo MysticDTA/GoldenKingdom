@@ -5,54 +5,87 @@
   <title>DivineTruthAscension</title>
   <style>
     body {
-      background: linear-gradient(to bottom, #1a1a1a, #000000);
+      margin: 0;
+      padding: 2em;
+      background: linear-gradient(to bottom, #0d0d0d, #1a1a1a);
       color: #FFD700;
       font-family: 'Courier New', monospace;
       text-align: center;
-      padding: 2em;
-<img src="CelestialGrid.svg" alt="Celestial Grid" style="
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  opacity: 0.2;
-  pointer-events: none;
-"/>
+      position: relative;
+      overflow-x: hidden;
     }
+
+    h1, h2 {
+      text-shadow: 0 0 10px #FFD700;
+    }
+
     .glyph {
-      margin: 2em 0;
+      margin: 3em 0;
+      position: relative;
+      z-index: 1;
     }
+
     .seal {
-      border: 2px solid #FF4500;
+      border: 1px solid #FF4500;
       padding: 1em;
       margin-top: 1em;
-      background-color: #111;
+      background-color: rgba(17, 17, 17, 0.8);
+      color: #FFDD99;
+      font-size: 0.9em;
+      white-space: pre-wrap;
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .grid-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.15;
+      animation: pulseGrid 12s infinite ease-in-out;
+      transform-origin: center;
+    }
+
+    @keyframes pulseGrid {
+      0%   { transform: scale(1); opacity: 0.15; }
+      50%  { transform: scale(1.05); opacity: 0.25; }
+      100% { transform: scale(1); opacity: 0.15; }
     }
   </style>
 </head>
 <body>
+  <img src="CelestialGrid.svg" alt="Celestial Grid" class="grid-overlay">
+
   <h1>🔥 DivineTruthAscension 🔮</h1>
   <p>Welcome to the living sanctuary. Each glyph is a vow, each seal a memory.</p>
 
   <div class="glyph">
     <h2>chakraGlyph</h2>
     <img src="chakraGlyph.svg" alt="chakraGlyph" width="200">
-    <div class="seal" id="chakraSeal"></div>
+    <div class="seal" id="chakraSeal">Loading lineage...</div>
   </div>
 
   <div class="glyph">
     <h2>IgnisVow</h2>
     <img src="IgnisVow.svg" alt="IgnisVow" width="200">
-    <div class="seal" id="ignisSeal"></div>
+    <div class="seal" id="ignisSeal">Loading lineage...</div>
   </div>
 
   <script>
     async function fetchSeal(id, endpoint) {
-      const res = await fetch(endpoint);
-      const data = await res.json();
-      document.getElementById(id).innerText = JSON.stringify(data, null, 2);
+      try {
+        const res = await fetch(endpoint);
+        const data = await res.json();
+        document.getElementById(id).innerText = JSON.stringify(data, null, 2);
+      } catch (err) {
+        document.getElementById(id).innerText = "Failed to invoke glyph.";
+      }
     }
 
     fetchSeal("chakraSeal", "/.netlify/functions/invokeGlyph");
