@@ -7,12 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="canonical" href="https://goldenkingdom.netlify.app/">
   <style>
-    body {
+    html, body {
       margin: 0;
-      padding: 2em;
+      padding: 0;
+      height: 100%;
+      width: 100%;
       background: linear-gradient(to bottom, #0d0d0d, #1a1a1a);
-      color: #FFEB3B;
       font-family: 'Courier New', monospace;
+      color: #FFEB3B;
+      overflow-x: hidden;
       text-align: center;
     }
 
@@ -40,15 +43,21 @@
       margin-right: auto;
     }
 
+    img {
+      max-width: 300px;
+      height: auto;
+      margin-top: 1em;
+    }
+
+    a {
+      color: #FFDD99;
+      text-decoration: underline;
+    }
+
     footer {
       margin-top: 3em;
       font-size: 0.8em;
       color: #aaa;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
     }
   </style>
 </head>
@@ -59,19 +68,21 @@
 
     <div class="glyph">
       <h2>chakraGlyph</h2>
-      <img src="chakraGlyph.svg" alt="chakraGlyph seal of alignment" onerror="this.style.display='none';">
+      <img src="chakraGlyph.svg" alt="chakraGlyph seal of alignment">
       <div class="seal" id="chakraSeal">Loading lineage...</div>
     </div>
 
     <div class="glyph">
       <h2>IgnisVow</h2>
-      <img src="IgnisVow.svg" alt="IgnisVow seal of purification" onerror="this.style.display='none';">
+      <img src="IgnisVow.svg" alt="IgnisVow seal of purification">
       <div class="seal" id="ignisSeal">Loading lineage...</div>
     </div>
+
+    <p><a href="manifest.html">View Full Glyph Manifest</a></p>
   </main>
 
   <footer>
-    Last updated: 2025-09-16 · Glyphs active: 2 · Powered by Netlify
+    Glyphs active: 2 · Frequencies: Solar, Ignition · Last tuned: 2025-09-16 · Powered by Netlify
   </footer>
 
   <script>
