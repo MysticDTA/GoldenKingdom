@@ -1,19 +1,29 @@
 const fs = require('fs');
 const path = require('path');
 
+// Folders to scan
+const rootDir = __dirname;
 const logosDir = path.join(__dirname, 'assets/logos');
-const mainCrests = ['logo-primary.svg', 'crest-monochrome.svg'];
 
+// Main SVGs in root
+const mainSvgs = ['logo-primary.svg', 'crest-monochrome.svg'];
+
+// Get all SVGs in assets/logos
+const assetSvgs = fs.existsSync(logosDir)
+  ? fs.readdirSync(logosDir).filter(f => f.endsWith('.svg'))
+  : [];
+
+// Start building HTML
 let html = `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>DivineTruthAscension Logo Previews</title>
 <style>
-  body { font-family: sans-serif; padding: 2rem; background: #111; color: #fff; }
-  h1 { margin-bottom: 1rem; }
-  img { max-width: 300px; margin: 1rem; border: 2px solid #ffd36b; border-radius: 8px; }
-  .logo-container { display: flex; flex-wrap: wrap; }
+body { font-family: sans-serif; padding: 2rem; background: #111; color: #fff; }
+h1 { margin-bottom: 1rem; }
+img { max-width: 300px; margin: 1rem; border: 2px solid #ffd36b; border-radius: 8px; }
+.logo-container { display: flex; flex-wrap: wrap; }
 </style>
 </head>
 <body>
@@ -23,21 +33,20 @@ let html = `<!DOCTYPE html>
 <div class="logo-container">
 `;
 
-mainCrests.forEach(file => {
-  html += `<img src="${file}" alt="${file}">\n`;
+mainSvgs.forEach(file => {
+  if (fs.existsSync(path.join(rootDir, file))) {
+    html += `<img src="${file}" alt="${file}">\n`;
+  }
 });
 
 html += `</div>\n<h2>Assets Logos</h2>\n<div class="logo-container">\n`;
 
-// Read all SVG files in assets/logos
-fs.readdirSync(logosDir).forEach(file => {
-  if (file.endsWith('.svg')) {
-    html += `<img src="assets/logos/${file}" alt="${file}">\n`;
-  }
+assetSvgs.forEach(file => {
+  html += `<img src="assets/logos/${file}" alt="${file}">\n`;
 });
 
 html += `</div>\n</body>\n</html>`;
 
-// Write to previews.html
-fs.writeFileSync('previews.html', html);
+// Write previews.html
+fs.writeFileSync(path.join(rootDir, 'previews.html'), html);
 console.log('previews.html generated successfully!');
