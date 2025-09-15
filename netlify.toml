@@ -1,13 +1,1 @@
-# netlify.toml
-[build]
-# command = "node generate_previews.js"
-publish = "."
-
-[build.environment]
-  NODE_VERSION = "20"
-
-# Redirect root URL to previews.html
-[[redirects]]
-  from = "/"
-  to = "/previews.html"
-  status = 200
+No build step needed
