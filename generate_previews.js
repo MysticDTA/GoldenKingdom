@@ -1,37 +1,48 @@
 const fs = require('fs');
 const path = require('path');
+const fetch = require('node-fetch'); // Make sure node-fetch is installed
 
-// ----- Existing preview generation code here -----
+// ------------------- Config -------------------
+const siteURL = 'https://yoursite.netlify.app/'; // Replace with your Netlify URL
 
-// ------------------- Auto SVG verification (fail on missing) -------------------
+// List all logos relative to project root
+const svgFiles = [
+  'logo-primary.svg',
+  'crest-monochrome.svg',
+  'assets/logos/logo-monochrome.svg',
+  'assets/logos/logo-variantB.svg'
+];
 
-// Replace with your Netlify site URL
-const siteURL = 'https://yoursite.netlify.app/';
+// ------------------- Generate previews.html -------------------
+const previewsHTML = `
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>DivineTruthAscension Crest Previews</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #111; color: #fff; padding: 20px; }
+    img { width: 200px; margin: 10px; border: 2px solid #fff; }
+  </style>
+</head>
+<body>
+  <h1>DivineTruthAscension Crest Previews</h1>
+  ${svgFiles.map(f => `<div><strong>${f}</strong><br/><img src="${f}" alt="${f}"/></div>`).join('\n')}
+</body>
+</html>
+`;
 
-// Recursively collect all .svg files from a folder
-function getSVGFiles(dir, base = '') {
-  let results = [];
-  const list = fs.readdirSync(dir, { withFileTypes: true });
-  for (const item of list) {
-    const fullPath = path.join(dir, item.name);
-    const relativePath = path.join(base, item.name).replace(/\\/g, '/');
-    if (item.isDirectory()) {
-      results = results.concat(getSVGFiles(fullPath, relativePath));
-    } else if (item.isFile() && item.name.endsWith('.svg')) {
-      results.push(relativePath);
-    }
-  }
-  return results;
-}
+fs.writeFileSync('previews.html', previewsHTML);
+console.log('✅ previews.html generated.');
 
-const svgFiles = getSVGFiles('.', '').filter(f => f.endsWith('.svg'));
-console.log(`\nFound ${svgFiles.length} SVGs to check on ${siteURL}\n`);
-
+// ------------------- Verify logos on deployed site -------------------
 (async () => {
   let hasMissing = false;
 
+  console.log(`\nChecking ${svgFiles.length} logos on ${siteURL} ...\n`);
+
   for (const file of svgFiles) {
-    const url = siteURL + file.replace(/^\.\//, ''); // remove leading ./
+    const url = siteURL + file;
     try {
       const res = await fetch(url, { method: 'HEAD' });
       if (res.ok) {
@@ -47,8 +58,8 @@ console.log(`\nFound ${svgFiles.length} SVGs to check on ${siteURL}\n`);
   }
 
   if (hasMissing) {
-    console.error('\n🚨 Some logos are missing or failed to deploy! Build will fail.\n');
-    process.exit(1); // Exit with error so Netlify build fails
+    console.error('\n🚨 Some logos are missing! Build will fail.\n');
+    process.exit(1);
   } else {
     console.log('\n✅ All logos are present. Build succeeded.\n');
   }
