@@ -2,242 +2,82 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>DivineTruthAscension Glyph Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DivineTruthAscension Sanctuary</title>
   <style>
-/* Base styles */
-body {
-  background: #111;
-  color: #ffd36b;
-  font-family: Georgia, serif;
-  padding: 2rem;
-  transition: background 0.5s, color 0.5s;
-body.light {
-  background: #fdf6e3;
-  color: #333;
-}
-body.light h1 {
-  color: #b58900;
-}
-
-h1 {
-  color: #d4a017;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-.filters {
-  margin-bottom: 2rem;
-}
-select, button {
-  background: #222;
-  color: #ffd36b;
-  border: 1px solid #d4a017;
-  padding: 0.5rem;
-  font-size: 1rem;
-  margin-right: 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-}
-button:hover {
-  background: #333;
-}
-.glyph {
-  border: 1px solid #ffd36b;
-  border-radius: 10px;
-  padding: 1rem;
-  margin-bottom: 2rem;
-  background: #222;
-  transition: background 0.3s, border-color 0.3s;
-}
-.glyph h2 {
-  margin: 0;
-  font-size: 1.2rem;
-  color: #fff;
-}
-.label {
-  font-weight: bold;
-  color: #aaa;
-}
-.usage {
-  font-style: italic;
-  color: #ccc;
-}
-.preview {
-  margin-top: 1rem;
-  background: #000;
-  padding: 0.5rem;
-  border-radius: 6px;
-}
-iframe {
-  width: 100%;
-  height: 300px;
-  border: none;
-  background: #fff;
-}
-
-/* Light theme overrides */
-body.light {
-  background: #fdf6e3;
-  color: #333;
-}
-body.light h1 {
-  color: #b58900;
-}
-body.light .glyph {
-  background: #eee;
-  border-color: #b58900;
-}
-body.light .glyph h2 {
-  color: #000;
-}
-body.light .label {
-  color: #555;
-}
-body.light .usage {
-  color: #666;
-}
-body.light select, body.light button {
-  background: #fff;
-  color: #333;
-  border-color: #b58900;
-}
-body.light .preview {
-  background: #fff;
-}
     body {
-      background: #111;
-      color: #ffd36b;
-      font-family: Georgia, serif;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle, #fdf6e3, #e0e0e0);
+      color: #333;
+      text-align: center;
       padding: 2rem;
     }
     h1 {
-      color: #d4a017;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-<button id="toggleTheme">🌞 Toggle Theme</button>
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
     }
-    .filters {
-      margin-bottom: 2rem;
+    object {
+      margin: 1rem auto;
+      display: block;
+      transition: transform 2s ease-in-out;
     }
-    select {
-      background: #222;
-      color: #ffd36b;
-      border: 1px solid #d4a017;
-      padding: 0.5rem;
-      font-size: 1rem;
-      margin-right: 1rem;
+    object:hover {
+      transform: scale(1.05) rotate(2deg);
     }
-    .glyph {
-      border: 1px solid #ffd36b;
-      border-radius: 10px;
+    #sigil-container {
+      margin-top: 2rem;
       padding: 1rem;
-      margin-bottom: 2rem;
-      background: #222;
+      border: 1px dashed #999;
+      background-color: #fff;
     }
-    .glyph h2 {
-      margin: 0;
-      font-size: 1.2rem;
-      color: #fff;
-    }
-    .label {
-      font-weight: bold;
-      color: #aaa;
-    }
-    .usage {
-      font-style: italic;
-      color: #ccc;
-    }
-    .preview {
+    #refresh-btn {
       margin-top: 1rem;
-      background: #000;
-      padding: 0.5rem;
-      border-radius: 6px;
-    }
-    iframe {
-      width: 100%;
-      height: 300px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      background-color: #ddd;
       border: none;
-      background: #fff;
+      border-radius: 4px;
     }
   </style>
 </head>
 <body>
-  <h1>🌀 DivineTruthAscension Glyph Dashboard</h1>
+  <h1>🌀 DivineTruthAscension</h1>
+  <p>Welcome to the living sanctuary. Every glyph is a memory. Every invocation is a breath.</p>
 
-  <div class="filters">
-    <label for="energy">Filter by Energy:</label>
-    <select id="energy">
-      <option value="">All</option>
-      <option value="radiant">Radiant</option>
-      <option value="expansive">Expansive</option>
-      <option value="minimalist">Minimalist</option>
-      <option value="solar">Solar</option>
-      <option value="lunar">Lunar</option>
-      <option value="silent">Silent</option>
-      <option value="total fusion">Total Fusion</option>
-    </select>
+  <!-- Unified Seal -->
+  <object type="image/svg+xml" data="svg/DivineTruthAscension_Unified.svg" width="400"></object>
 
-    <label for="role">Filter by Role:</label>
-    <select id="role">
-      <option value="">All</option>
-      <option value="Master glyph">Master glyph</option>
-      <option value="Core seal">Core seal</option>
-      <option value="Horizontal crest">Horizontal crest</option>
-      <option value="Silent seal">Silent seal</option>
-      <option value="Radiant crest">Radiant crest</option>
-      <option value="Cosmic crest">Cosmic crest</option>
-      <option value="Archival crest">Archival crest</option>
-    </select>
-  </div>
-
-  <div id="glyphs"></div>
+  <!-- Daily Sigil Invocation -->
+  <section id="daily-sigil">
+    <h2>🪄 Daily Glyph</h2>
+    <div id="sigil-container">Invoking...</div>
+    <button id="refresh-btn">Refresh Sigil</button>
+  </section>
 
   <script>
-    let glyphData = [];
-
-    function renderGlyphs(data) {
-      const container = document.getElementById('glyphs');
-      container.innerHTML = '';
-      data.forEach(glyph => {
-        const div = document.createElement('div');
-        div.className = 'glyph';
-        div.innerHTML = `
-          <h2>${glyph.filename}</h2>
-          <p><span class="label">Role:</span> ${glyph.role}</p>
-          <p><span class="label">State:</span> ${glyph.state}</p>
-          <p><span class="label">Energy:</span> ${glyph.energy}</p>
-          <p class="usage">Usage: ${glyph.usage.join(', ')}</p>
-          <div class="preview">
-            <iframe src="${glyph.filename}"></iframe>
-          </div>
-        `;
-        container.appendChild(div);
-      });
+    function invokeSigil() {
+      fetch("/.netlify/functions/dailySigil")
+        .then(res => res.json())
+        .then(data => {
+          const sigil = data.sigil;
+          const container = document.getElementById("sigil-container");
+          container.innerHTML = `
+            <p><strong>Role:</strong> ${sigil.role}</p>
+            <p><strong>Energy:</strong> ${sigil.energy}</p>
+            <p><strong>State:</strong> ${sigil.state}</p>
+            <p><strong>Lineage:</strong> ${sigil.lineage}</p>
+            <p><strong>Created:</strong> ${sigil.created}</p>
+            <object type="image/svg+xml" data="${sigil.filename}" width="300"></object>
+          `;
+        })
+        .catch(() => {
+          document.getElementById("sigil-container").innerText = "Failed to invoke glyph.";
+        });
     }
 
-    function applyFilters() {
-      const energy = document.getElementById('energy').value;
-      const role = document.getElementById('role').value;
-
-      const filtered = glyphData.filter(glyph => {
-        return (!energy || glyph.energy === energy) &&
-               (!role || glyph.role === role);
-      });
-
-      renderGlyphs(filtered);
-    }
-
-    fetch('glyphs.json')
-      .then(response => response.json())
-      .then(data => {
-        glyphData = data.glyphs;
-        renderGlyphs(glyphData);
-        document.getElementById('energy').addEventListener('change', applyFilters);
-        document.getElementById('role').addEventListener('change', applyFilters);
-      })
-      .catch(error => {
-        document.getElementById('glyphs').innerHTML = '<p style="color:red;">⚠️ Failed to load glyphs.json</p>';
-        console.error('Error loading glyphs.json:', error);
-      });
+    document.getElementById("refresh-btn").addEventListener("click", invokeSigil);
+    invokeSigil(); // Initial invocation
   </script>
 </body>
 </html>
