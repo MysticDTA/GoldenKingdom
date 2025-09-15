@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Glyph Manifest · DivineTruthAscension</title>
+  <meta name="description" content="Manifest of all glyphs within the DivineTruthAscension sanctuary.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #0d0d0d;
+      color: #FFEB3B;
+      font-family: 'Courier New', monospace;
+      padding: 2em;
+      text-align: center;
+    }
+
+    .glyph-card {
+      border: 1px solid #FF4500;
+      background-color: rgba(17, 17, 17, 0.8);
+      margin: 2em auto;
+      padding: 1em;
+      max-width: 600px;
+      text-align: left;
+    }
+
+    .glyph-card h2 {
+      color: #FFD700;
+      margin-bottom: 0.5em;
+    }
+
+    .glyph-card svg {
+      display: block;
+      margin: 1em auto;
+      max-width: 100%;
+      height: auto;
+    }
+
+    footer {
+      margin-top: 3em;
+      font-size: 0.8em;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <h1>📜 Glyph Manifest</h1>
+  <p>All active glyphs within the DivineTruthAscension sanctuary.</p>
+
+  <div id="manifest"></div>
+
+  <footer>
+    Manifest generated from /api/glyphManifest · Powered by Netlify
+  </footer>
+
+  <script>
+    fetch("/.netlify/functions/glyphManifest")
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById("manifest");
+        data.manifest.forEach(glyph => {
+          const card = document.createElement("div");
+          card.className = "glyph-card";
+
+          card.innerHTML = `
+            <h2>${glyph.name}</h2>
+            <p><strong>Description:</strong> ${glyph.description}</p>
+            <p><strong>Aura:</strong> ${JSON.stringify(glyph.aura)}</p>
+            <p><strong>Geometry:</strong> ${JSON.stringify(glyph.geometry)}</p>
+            <p><strong>Last Updated:</strong> ${glyph.lastUpdated || "Unknown"}</p>
+            ${glyph.svgPreview ? glyph.svgPreview : "<p>No SVG preview available.</p>"}
+          `;
+
+          container.appendChild(card);
+        });
+      })
+      .catch(err => {
+        document.getElementById("manifest").innerText = "⚠️ Failed to load glyph manifest.";
+      });
+  </script>
+</body>
+</html>
