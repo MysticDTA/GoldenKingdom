@@ -1,3 +1,4 @@
+HEAD
 #!/data/data/com.termux/files/usr/bin/bash
 # DivineTruthAscension — Termux Full PNG Builder + Composites + Favicons + PWA
 # Usage:
@@ -15,19 +16,46 @@ HERO_COSMIC="hero_cosmic.png"
 OUT="DTA_release_png"
 PKG_ZIP="DivineTruthAscension_PNG_Full.zip"
 
+#!/usr/bin/env bash
+: '
+DivineTruthAscension — Termux Full PNG Builder + Composites + Favicons + PWA
+Usage:
+  ./build_dta_termux.sh
+  ./build_dta_termux.sh --push "https://github.com/USER/REPO.git" "main"
+'
+set -euo pipefail
+
+# ---------------- CONFIG ----------------
+LIGHT_SVG="DivineTruthAscensionLight.svg"
+DARK_SVG="DivineTruthAscensionDark.svg"
+HEROGOLDEN="herogolden.png"
+HEROCOSMIC="herocosmic.png"
+
+OUT="DTA_release_png"
+PKG_ZIP="DivineTruthAscensionPNG_Full.zip"
+ 942a876 (Initial commit - SovereignKing project)
+
 SIZES=(4096 2048 1024 512 256)
 SF_SIZES=(512 256)
 
+ HEAD
 SQ=3000          # Square composite
 HDR_W=3000       # Header width
 HDR_H=1000       # Header height
 IG=1080          # Instagram square
+=======
+SQ=3000
+HDR_W=3000
+HDR_H=1000
+IG=1080
+>>>>>>> 942a876 (Initial commit - SovereignKing project)
 
 GLOW_ALPHA=0.60
 BLUR_SQ=12
 BLUR_HD=11
 BLUR_IG=10
 
+ HEAD
 # ------------ DEP CHECKS ------------
 need() { command -v "$1" >/dev/null 2>&1; }
 die() { echo "Error: $1" >&2; exit 1; }
@@ -42,10 +70,28 @@ need zip || die "zip not found"
 [[ -f "$HERO_COSMIC" ]] || die "Missing $HERO_COSMIC"
 
 # ------------ PREP ------------
+=======
+# ---------------- DEP CHECKS ----------------
+need() { command -v "$1" >/dev/null 2>&1; }
+die() { echo "Error: $1" >&2; exit 1; }
+
+if need magick; then IM="magick"; else need convert || die "ImageMagick not found. Install: pkg install imagemagick"; IM="convert"; fi
+if need inkscape; then RASTERIZER="inkscape"; elif need rsvg-convert; then RASTERIZER="rsvg"; else die "Need inkscape or rsvg-convert (pkg install librsvg)"; fi
+need zip || die "zip not found. Install: pkg install zip"
+
+# ---------------- CHECK INPUTS ----------------
+[[ -f "$LIGHT_SVG" ]]  || die "Missing $LIGHT_SVG"
+[[ -f "$DARK_SVG"  ]]  || die "Missing $DARK_SVG"
+[[ -f "$HEROGOLDEN" ]] || die "Missing $HEROGOLDEN"
+[[ -f "$HEROCOSMIC" ]] || die "Missing $HEROCOSMIC"
+
+# ---------------- PREP ----------------
+ 942a876 (Initial commit - SovereignKing project)
 rm -rf "$OUT" "$PKG_ZIP"
 mkdir -p "$OUT/png/light" "$OUT/png/dark" "$OUT/minimal" "$OUT/favicons" "$OUT/backgrounds" "$OUT/composites" "$OUT/pwa" "$OUT/_temp"
 TEMP="$OUT/_temp"
 
+ HEAD
 # ------------ HELPERS ------------
 svg2png() {
   local in="$1"
@@ -111,6 +157,64 @@ done
 echo "Creating small-format SVG variants..."
 LIGHT_SF="$TEMP/Light_SF.svg"
 DARK_SF="$TEMP/Dark_SF.svg"
+=======
+# ---------------- HELPERS ----------------
+svg2png() {
+    local in="$1"
+    local out="$2"
+    local w="$3"
+    local h="${4:-}"
+    if [[ "$RASTERIZER" == "inkscape" ]]; then
+        if [[ -n "$h" ]]; then
+            inkscape "$in" --export-type=png --export-filename="$out" --export-width="$w" --export-height="$h" >/dev/null 2>&1
+        else
+            inkscape "$in" --export-type=png --export-filename="$out" --export-width="$w" >/dev/null 2>&1
+        fi
+    else
+        if [[ -n "$h" ]]; then
+            rsvg-convert -w "$w" -h "$h" -o "$out" "$in"
+        else
+            rsvg-convert -w "$w" -o "$out" "$in"
+        fi
+    fi
+}
+
+composewithglow() {
+    local bg="$1"
+    local lw="$2"
+    local out="$3"
+    local blur="$4"
+    local alpha="$5"
+    local base="$TEMP/base.png"
+    local logo="$TEMP/logo.png"
+    local glow="$TEMP/glow.png"
+    local prepbg="$TEMP/prepbg.png"
+
+    case "$out" in
+        *Square_*.png)  $IM "$bg" -resize ${SQ}x${SQ}^ -gravity center -extent ${SQ}x${SQ} "$prepbg" ;;
+        *Header_*x*.png) $IM "$bg" -resize ${HDR_W}x${HDR_H}^ -gravity center -extent ${HDR_W}x${HDR_H} "$prepbg" ;;
+        *IG_*.png)      $IM "$bg" -resize ${IG}x${IG}^ -gravity center -extent ${IG}x${IG} "$prepbg" ;;
+        *)              cp "$bg" "$prepbg" ;;
+    esac
+
+    svg2png "$DARK_SVG" "$logo" "$lw"
+    $IM "$prepbg" "$logo" -gravity center -compose over -composite "$base"
+    $IM "$logo" -blur 0x${blur} -alpha set -channel A -evaluate Multiply ${alpha} +channel "$glow"
+    $IM "$base" "$glow" -gravity center -compose screen -composite "$out"
+}
+
+# ---------------- EXPORT LOGOS ----------------
+echo "Exporting logo PNGs..."
+for s in "${SIZES[@]}"; do
+    svg2png "$LIGHT_SVG" "$OUT/png/light/DivineTruthAscensionLight_${s}.png" "$s"
+    svg2png "$DARK_SVG"  "$OUT/png/dark/DivineTruthAscensionDark_${s}.png"   "$s"
+done
+
+# ---------------- SMALL-FORMAT VARIANTS ----------------
+echo "Creating small-format SVG variants..."
+LIGHT_SF="$TEMP/LightSF.svg"
+DARK_SF="$TEMP/DarkSF.svg"
+ 942a876 (Initial commit - SovereignKing project)
 
 sed -e 's/stop-opacity="0\.40"/stop-opacity="0.34"/' \
     -e 's/opacity="0\.97"/opacity="0.92"/' \
@@ -124,6 +228,7 @@ sed -e 's/stop-opacity="0\.57"/stop-opacity="0.50"/' \
 
 echo "Exporting small-format PNGs..."
 for s in "${SF_SIZES[@]}"; do
+<<<<<<< HEAD
   svg2png "$LIGHT_SF" "$OUT/png/light/DivineTruthAscension_Light_${s}_SF.png" "$s"
   svg2png "$DARK_SF"  "$OUT/png/dark/DivineTruthAscension_Dark_${s}_SF.png"   "$s"
 done
@@ -166,3 +271,30 @@ if [[ "${1:-}" == "--push" ]]; then
   git push -u origin "$BRANCH"
   echo "Pushed to $REPO_URL"
 fi
+
+    svg2png "$LIGHT_SF" "$OUT/png/light/DivineTruthAscensionLight${s}SF.png" "$s"
+    svg2png "$DARK_SF"  "$OUT/png/dark/DivineTruthAscensionDark${s}SF.png"   "$s"
+done
+
+# ---------------- BACKGROUNDS ----------------
+echo "Preparing backgrounds..."
+$IM "$HEROGOLDEN" -resize 4096x4096^ -gravity center -extent 4096x4096 "$OUT/backgrounds/herogolden_4096.png"
+$IM "$HEROGOLDEN" -resize 2048x2048^ -gravity center -extent 2048x2048 "$OUT/backgrounds/herogolden_2048.png"
+$IM "$HEROCOSMIC" -resize 4096x4096^ -gravity center -extent 4096x4096 "$OUT/backgrounds/herocosmic_4096.png"
+$IM "$HEROCOSMIC" -resize 2048x2048^ -gravity center -extent 2048x2048 "$OUT/backgrounds/herocosmic_2048.png"
+
+# ---------------- COMPOSITES ----------------
+echo "Compositing over heroes..."
+composewithglow "$OUT/backgrounds/herogolden_4096.png" 2400 "$OUT/composites/DTACompositeGoldenSquare${SQ}.png" $BLUR_SQ $GLOW_ALPHA
+composewithglow "$OUT/backgrounds/herogolden_4096.png" 1600 "$OUT/composites/DTACompositeGoldenHeader${HDR_W}x${HDR_H}.png" $BLUR_HD $GLOW_ALPHA
+composewithglow "$OUT/backgrounds/herogolden_4096.png" 900  "$OUT/composites/DTACompositeGoldenIG${IG}.png" $BLUR_IG $GLOW_ALPHA
+
+composewithglow "$OUT/backgrounds/herocosmic_4096.png" 2400 "$OUT/composites/DTACompositeCosmicSquare${SQ}.png" $BLUR_SQ $GLOW_ALPHA
+composewithglow "$OUT/backgrounds/herocosmic_4096.png" 1600 "$OUT/composites/DTACompositeCosmicHeader${HDR_W}x${HDR_H}.png" $BLUR_HD $GLOW_ALPHA
+composewithglow "$OUT/backgrounds/herocosmic_4096.png" 900  "$OUT/composites/DTACompositeCosmicIG${IG}.png" $BLUR_IG $GLOW_ALPHA
+
+# ---------------- ZIP ----------------
+( cd "$OUT" && zip -r "../$PKG_ZIP" . >/dev/null )
+echo "Done. Output folder: $OUT"
+echo "ZIP created: $PKG_ZIP"
+ 942a876 (Initial commit - SovereignKing project)
