@@ -1,8 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-exports.handler = async () => {
+exports.handler = async (event) => {
   const publicPath = path.resolve(__dirname, '../../public');
+  const format = event.queryStringParameters.format || "full";
 
   try {
     const files = fs.readdirSync(publicPath);
@@ -11,12 +12,17 @@ exports.handler = async () => {
     const manifest = glyphFiles.map(file => {
       const baseName = file.replace('.json', '');
       const jsonPath = path.join(publicPath, file);
-      const svgPath = path.join(publicPath, `${baseName}.svg`);
-
       const lineage = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
-      const svg = fs.existsSync(svgPath)
-        ? fs.readFileSync(svgPath, 'utf8')
-        : null;
+
+      if (format === "compact") {
+        return {
+          name: lineage.name || baseName,
+          path: `/public/${baseName}.svg`
+        };
+      }
+
+      const svgPath = path.join(publicPath, `${baseName}.svg`);
+      const svg = fs.existsSync(svgPath) ? fs.readFileSync(svgPath, 'utf8') : null;
 
       return {
         name: lineage.name || baseName,
@@ -34,6 +40,7 @@ exports.handler = async () => {
       body: JSON.stringify({
         manifest,
         count: manifest.length,
+        format,
         timestamp: new Date().toISOString()
       })
     };
