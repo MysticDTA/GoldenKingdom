@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DivineTruthAscension</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #1a1a1a, #000000);
+      color: #FFD700;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      padding: 2em;
+    }
+    .glyph {
+      margin: 2em 0;
+    }
+    .seal {
+      border: 2px solid #FF4500;
+      padding: 1em;
+      margin-top: 1em;
+      background-color: #111;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔥 DivineTruthAscension 🔮</h1>
+  <p>Welcome to the living sanctuary. Each glyph is a vow, each seal a memory.</p>
+
+  <div class="glyph">
+    <h2>chakraGlyph</h2>
+    <img src="chakraGlyph.svg" alt="chakraGlyph" width="200">
+    <div class="seal" id="chakraSeal"></div>
+  </div>
+
+  <div class="glyph">
+    <h2>IgnisVow</h2>
+    <img src="IgnisVow.svg" alt="IgnisVow" width="200">
+    <div class="seal" id="ignisSeal"></div>
+  </div>
+
+  <script>
+    async function fetchSeal(id, endpoint) {
+      const res = await fetch(endpoint);
+      const data = await res.json();
+      document.getElementById(id).innerText = JSON.stringify(data, null, 2);
+    }
+
+    fetchSeal("chakraSeal", "/.netlify/functions/invokeGlyph");
+    fetchSeal("ignisSeal", "/.netlify/functions/invokeIgnisVow");
+  </script>
+</body>
+</html>
