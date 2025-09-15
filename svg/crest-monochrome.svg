@@ -1,8 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1300" viewBox="0 0 1000 1300">
-  <circle cx="500" cy="300" r="230" fill="none" stroke="#000" stroke-width="10"/>
-  <g transform="translate(500,350)">
-    <path d="M-260,0 C-200,-180 -60,-260 0,-260 C60,-260 260,-180 310,0 C260,60 80,60 0,60 C-80,60 -260,60 -260,0 Z" fill="#000" opacity="0.95"/>
-    <path d="M-180,60 C-140,20 -60,0 0,0 C60,0 180,20 220,60 C170,120 30,120 0,120 C-30,120 -180,120 -180,60 Z" fill="#000" opacity="0.92"/>
-    <ellipse cx="0" cy="0" rx="60" ry="90" fill="#000" opacity="0.95"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="none" />
+  <path d="M50,10 Q70,50 50,90 Q30,50 50,10" stroke="black" stroke-width="2" fill="none" />
 </svg>

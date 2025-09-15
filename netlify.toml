@@ -1,2 +1,5 @@
+[build]
+publish = "DTA_release_png"
+
 [functions]
 directory = "netlify/functions"
