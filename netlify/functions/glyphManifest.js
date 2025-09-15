@@ -21,6 +21,15 @@ exports.handler = async (event) => {
         };
       }
 
+      if (format === "meta") {
+        return {
+          name: lineage.name || baseName,
+          geometry: lineage.geometry || null,
+          aura: lineage.aura || null,
+          lastUpdated: lineage.metadata?.lastUpdated || null
+        };
+      }
+
       const svgPath = path.join(publicPath, `${baseName}.svg`);
       const svg = fs.existsSync(svgPath) ? fs.readFileSync(svgPath, 'utf8') : null;
 
