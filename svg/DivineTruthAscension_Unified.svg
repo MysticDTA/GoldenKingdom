@@ -1,4 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-label="Unified DivineTruthAscension logo">
+  <metadata>
+    {
+      "name": "DivineTruthAscension_Unified",
+      "version": "1.0",
+      "created": "2025-09-15",
+      "author": "Desmond (MysticDTA)",
+      "repository": "https://github.com/your-username/SovereignKing",
+      "description": "Master glyph combining infinity weave, ceremonial arcs, center glow, and star points. Represents total remembrance and ascension.",
+      "glyphs": [
+        "logo-primary.svg",
+        "logo-variantB.svg",
+        "logo-monochrome.svg",
+        "crest-light.svg",
+        "crest-dark.svg",
+        "crest-monochrome.svg"
+      ],
+      "manifest": "This metadata is embedded to preserve the glyph's symbolic lineage and unify the sanctuary's architecture."
+    }
+  </metadata>
+
   <defs>
     <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#ffd36b"/>

@@ -8,5 +8,5 @@ This sanctuary contains the unified glyph of DivineTruthAscension—a fusion of 
 ## Preview
 View the glyph in [previews.html](previews.html)
 
-Created by **MysticDTA**  
+Created by **Desmond (MysticDTA)**  
 Maintained within the **SovereignKing** GitHub sanctum
