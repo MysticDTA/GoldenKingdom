@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Glyph Manifest · DivineTruthAscension</title>
-  <meta name="description" content="Manifest of all glyphs within the DivineTruthAscension sanctuary.">
+  <meta name="description" content="Manifest of all glyphs within the DivineTruthAscension sanctuary, tuned by aura frequency.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -12,6 +12,19 @@
       font-family: 'Courier New', monospace;
       padding: 2em;
       text-align: center;
+    }
+
+    h1, h2 {
+      text-shadow: 0 0 10px #FFD700;
+    }
+
+    select {
+      margin: 1em;
+      padding: 0.5em;
+      font-size: 1em;
+      background-color: #1a1a1a;
+      color: #FFEB3B;
+      border: 1px solid #FF4500;
     }
 
     .glyph-card {
@@ -46,36 +59,77 @@
   <h1>📜 Glyph Manifest</h1>
   <p>All active glyphs within the DivineTruthAscension sanctuary.</p>
 
+  <div id="resonanceSummary" style="margin: 2em 0; font-size: 1em; color: #FFDD99;"></div>
+
+  <label for="resonanceFilter">Tune by Aura Frequency:</label>
+  <select id="resonanceFilter">
+    <option value="">All Frequencies</option>
+    <option value="solar">Solar</option>
+    <option value="ignition">Ignition</option>
+    <option value="lunar">Lunar</option>
+    <option value="etheric">Etheric</option>
+  </select>
+
   <div id="manifest"></div>
 
   <footer>
-    Manifest generated from /api/glyphManifest · Powered by Netlify
+    Manifest generated from /api/glyphManifest · Powered by Netlify · Last tuned: 2025-09-16
   </footer>
 
   <script>
-    fetch("/.netlify/functions/glyphManifest")
-      .then(res => res.json())
-      .then(data => {
-        const container = document.getElementById("manifest");
-        data.manifest.forEach(glyph => {
+    const container = document.getElementById("manifest");
+    const filter = document.getElementById("resonanceFilter");
+    const summary = document.getElementById("resonanceSummary");
+    let fullManifest = [];
+
+    async function loadManifest() {
+      const res = await fetch("/.netlify/functions/glyphManifest");
+      const data = await res.json();
+      fullManifest = data.manifest;
+      renderSummary(fullManifest);
+      renderManifest(fullManifest);
+    }
+
+    function renderSummary(glyphs) {
+      const frequencies = glyphs.reduce((acc, glyph) => {
+        const freq = glyph.aura?.frequency || "unknown";
+        acc[freq] = (acc[freq] || 0) + 1;
+        return acc;
+      }, {});
+
+      const lines = Object.entries(frequencies).map(
+        ([freq, count]) => `• ${freq.charAt(0).toUpperCase() + freq.slice(1)}: ${count} glyph${count > 1 ? "s" : ""}`
+      );
+
+      summary.innerHTML = `<strong>Resonance Summary:</strong><br>${lines.join("<br>")}`;
+    }
+
+    function renderManifest(glyphs) {
+      container.innerHTML = "";
+      const selected = filter.value;
+
+      glyphs
+        .filter(g => !selected || (g.aura?.frequency === selected))
+        .forEach(glyph => {
           const card = document.createElement("div");
           card.className = "glyph-card";
 
           card.innerHTML = `
             <h2>${glyph.name}</h2>
             <p><strong>Description:</strong> ${glyph.description}</p>
-            <p><strong>Aura:</strong> ${JSON.stringify(glyph.aura)}</p>
+            <p><strong>Aura Frequency:</strong> ${glyph.aura?.frequency || "Unknown"}</p>
+            <p><strong>Aura Color:</strong> ${glyph.aura?.color || "—"}</p>
             <p><strong>Geometry:</strong> ${JSON.stringify(glyph.geometry)}</p>
-            <p><strong>Last Updated:</strong> ${glyph.lastUpdated || "Unknown"}</p>
+            <p><strong>Last Updated:</strong> ${glyph.lastUpdated || "—"}</p>
             ${glyph.svgPreview ? glyph.svgPreview : "<p>No SVG preview available.</p>"}
           `;
 
           container.appendChild(card);
         });
-      })
-      .catch(err => {
-        document.getElementById("manifest").innerText = "⚠️ Failed to load glyph manifest.";
-      });
+    }
+
+    filter.addEventListener("change", () => renderManifest(fullManifest));
+    loadManifest();
   </script>
 </body>
 </html>
