@@ -1,0 +1,20 @@
+{
+  "name": "IgnisVow",
+  "description": "A radiant flame seal representing protection, purification, and sovereign authority.",
+  "geometry": {
+    "type": "triple flame ring",
+    "center": "phoenix crest",
+    "outerLayer": "solar burst"
+  },
+  "aura": {
+    "element": "fire",
+    "colors": ["#FF4500", "#FFD700", "#FF6347"],
+    "energy": "purification and rebirth"
+  },
+  "metadata": {
+    "createdBy": "Desmond",
+    "repository": "GoldenKingdom",
+    "invocationPath": "/public/IgnisVow.svg",
+    "lastUpdated": "2025-09-15"
+  }
+}
