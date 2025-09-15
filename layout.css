@@ -1,0 +1,85 @@
+/* 🌌 Universal Reset & Background */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to bottom, #0d0d0d, #1a1a1a);
+  font-family: 'Courier New', monospace;
+  color: #FFEB3B;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  text-align: center;
+}
+
+/* 🔮 Headings & Glow */
+h1, h2 {
+  text-shadow: 0 0 10px #FFD700;
+  margin-top: 1em;
+}
+
+/* 🧿 Glyph Containers */
+.glyph {
+  margin: 3em 0;
+  position: relative;
+  z-index: 1;
+}
+
+.glyph img {
+  max-width: 300px;
+  height: auto;
+  margin-top: 1em;
+}
+
+/* 📜 Seal Display */
+.seal {
+  border: 1px solid #FF4500;
+  padding: 1em;
+  margin-top: 1em;
+  background-color: rgba(17, 17, 17, 0.8);
+  color: #FFDD99;
+  font-size: 0.9em;
+  white-space: pre-wrap;
+  text-align: left;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ⚖️ Footer */
+footer {
+  margin-top: 3em;
+  font-size: 0.8em;
+  color: #aaa;
+}
+
+/* 📎 Links */
+a {
+  color: #FFDD99;
+  text-decoration: underline;
+}
+
+/* 🌀 Select Dropdowns */
+select {
+  margin: 1em;
+  padding: 0.5em;
+  font-size: 1em;
+  background-color: #1a1a1a;
+  color: #FFEB3B;
+  border: 1px solid #FF4500;
+}
+
+/* 📱 Responsive Adjustments */
+@media (max-width: 600px) {
+  .glyph img {
+    max-width: 90%;
+  }
+
+  .seal {
+    font-size: 0.8em;
+  }
+
+  select {
+    width: 90%;
+  }
+}
