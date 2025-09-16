@@ -1,0 +1,5 @@
+{
+  "tasks": {
+    "optimize": "deno run --allow-read --allow-write scripts/optimize-glyphs.ts"
+  }
+}
