@@ -1,71 +1,78 @@
-body {
-  font-family: 'Georgia', serif;
-  background: linear-gradient(to bottom, #fdf6e3, #e0e0d1);
-  color: #3a2f1b;
+body.manifest-scroll {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fdfaf6;
+  color: #333;
   margin: 0;
-  padding: 0;
+  padding: 2em;
+  line-height: 1.6;
 }
 
-.scroll-header {
+header h1 {
+  font-size: 2.5em;
   text-align: center;
-  padding: 2rem;
-  background-color: #fff8dc;
-  border-bottom: 1px solid #d4af37;
+  margin-bottom: 0.2em;
 }
 
-.glyph {
+.invocation {
   text-align: center;
-  margin: 2rem auto;
-}
-
-.glyph img {
-  max-width: 200px;
-  margin-top: 1rem;
-}
-
-.seal {
   font-style: italic;
-  margin-top: 0.5rem;
-  color: #6b4f1d;
+  color: #555;
 }
 
-.sanctuary-call {
-  background: linear-gradient(to bottom, #fff8dc, #f5f5dc);
-  border: 1px solid #d4af37;
-  padding: 2rem;
-  margin: 3rem auto;
-  text-align: center;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-  max-width: 700px;
+section {
+  margin: 2em 0;
 }
 
-.glyph-emblem {
-  max-width: 120px;
-  margin: 1rem auto;
+section h2 {
+  font-size: 1.8em;
+  color: #444;
+  border-bottom: 2px solid #e0d7c6;
+  padding-bottom: 0.3em;
+}
+
+.glyph-registry ul,
+.contributors ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.glyph-registry li,
+.contributors li {
+  margin: 0.5em 0;
+  padding-left: 1em;
+  position: relative;
+}
+
+.glyph-registry li::before,
+.contributors li::before {
+  content: "🜁";
+  position: absolute;
+  left: 0;
+  color: #c2a76d;
+}
+
+.constellation-embed img {
   display: block;
-}
-
-.scroll-link {
-  display: inline-block;
-  margin-top: 1.5rem;
-  padding: 0.75rem 1.5rem;
-  background-color: #d4af37;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
+  margin: 1em auto;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #e0d7c6;
   border-radius: 8px;
-  transition: background-color 0.3s ease;
-}
-
-.scroll-link:hover {
-  background-color: #bfa12f;
 }
 
 .scroll-footer {
   text-align: center;
-  padding: 1rem;
-  background-color: #f5f5dc;
-  font-size: 0.9rem;
-  border-top: 1px solid #d4af37;
+  margin-top: 3em;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.scroll-footer a {
+  color: #a67c52;
+  text-decoration: none;
+  margin: 0 0.5em;
+}
+
+.scroll-footer a:hover {
+  text-decoration: underline;
 }
