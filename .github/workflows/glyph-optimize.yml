@@ -1,0 +1,17 @@
+name: Glyph Optimization Ritual
+
+on:
+  push:
+    paths:
+      - "svg/**"
+      - "scripts/optimize-glyphs.ts"
+
+jobs:
+  optimize-glyphs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: "1.x"
+      - run: deno task optimize
