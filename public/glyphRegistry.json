@@ -1,0 +1,26 @@
+[
+  {
+    "name": "sanctuaryGlyph",
+    "path": "svg/sanctuaryGlyph.svg",
+    "intention": "Symbol of healing, unity, and remembrance",
+    "lineage": "GoldenKingdom"
+  },
+  {
+    "name": "chakraGlyph",
+    "path": "svg/chakraGlyph.svg",
+    "intention": "Amplifies inner alignment and energetic flow",
+    "lineage": "DivineTruthAscension"
+  },
+  {
+    "name": "glyphConstellation",
+    "path": "svg/glyphConstellation.svg",
+    "intention": "Map of glyph relationships and sacred geometry",
+    "lineage": "GoldenKingdom"
+  },
+  {
+    "name": "logo",
+    "path": "svg/logo.svg",
+    "intention": "Seal of the unified temple",
+    "lineage": "Merged SovereignKing & DTA"
+  }
+]
