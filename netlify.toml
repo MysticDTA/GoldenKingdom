@@ -1,7 +1,3 @@
 [build]
-  publish = "public"
-  command = "echo '🧿 No build step required — deploying static sanctuary.'"
-
-[functions]
-  directory = "netlify/functions"
-
+command = "deno task optimize && npm run build"
+publish = "public"
