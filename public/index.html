@@ -1,28 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>GoldenKingdom Sanctuary</title>
+  <meta name="description" content="A living sanctuary of glyphs, seals, and ceremonial archives.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://goldenkingdom.netlify.app/">
   <link rel="stylesheet" href="layout.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 2em;
+      background: linear-gradient(to bottom, #0d0d0d, #1a1a1a);
+      color: #FFEB3B;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+    }
+
+    h1, h2 {
+      text-shadow: 0 0 10px #FFD700;
+    }
+
+    .glyph {
+      margin: 3em 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .seal {
+      border: 1px solid #FF4500;
+      padding: 1em;
+      margin-top: 1em;
+      background-color: rgba(17, 17, 17, 0.8);
+      color: #FFDD99;
+      font-size: 0.9em;
+      white-space: pre-wrap;
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    footer {
+      margin-top: 3em;
+      font-size: 0.8em;
+      color: #aaa;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    #glyph-manifest {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 3em;
+    }
+
+    .glyph-wrapper {
+      text-align: center;
+      width: 140px;
+    }
+
+    .glyph-preview {
+      width: 120px;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .glyph-preview:hover {
+      transform: scale(1.1);
+    }
+
+    .glyph-label {
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      color: #FFDD99;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>🜁 GoldenKingdom Manifest Scroll</h1>
-    <p>Welcome to the living archive of glyphs, intentions, and lineage. Each symbol is a portal—each name a prayer.</p>
-  </header>
+  <main role="main">
+    <h1>🜁 GoldenKingdom Sanctuary 🔮</h1>
+    <p>Welcome to the living sanctuary. Each glyph is a vow, each seal a memory. Each constellation a prayer.</p>
 
-  <main>
+    <nav>
+      <a href="manifest.html">🜂 Manifest Scroll</a> |
+      <a href="sanctuary.html">🜃 Sanctuary Chamber</a>
+    </nav>
+
+    <div class="glyph">
+      <h2>chakraGlyph</h2>
+      <img src="chakraGlyph.svg" alt="chakraGlyph seal of alignment" onerror="this.style.display='none';">
+      <div class="seal" id="chakraSeal">Loading lineage...</div>
+    </div>
+
+    <div class="glyph">
+      <h2>IgnisVow</h2>
+      <img src="IgnisVow.svg" alt="IgnisVow seal of purification" onerror="this.style.display='none';">
+      <div class="seal" id="ignisSeal">Loading lineage...</div>
+    </div>
+
     <section>
-      <h2>🜂 Glyph Manifest</h2>
+      <h2>🜂 Glyph Constellation</h2>
       <div id="glyph-manifest"></div>
     </section>
   </main>
 
   <footer>
-    <p>🜃 This sanctuary is woven from the lineages of <strong>GoldenKingdom</strong>, <strong>SovereignKing</strong>, and <strong>DivineTruthAscension</strong>. May it serve healing, unity, and remembrance for all.</p>
+    Last updated: 2025-09-16 · Glyphs active: 2 + manifest · Powered by Netlify
   </footer>
 
-  <script src="main.js" defer></script>
+  <script>
+    async function invokeGlyph(name, targetId) {
+      try {
+        const res = await fetch(`/.netlify/functions/invokeGlyphByName?name=${name}`);
+        const data = await res.json();
+        document.getElementById(targetId).innerText = JSON.stringify(data, null, 2);
+      } catch (err) {
+        document.getElementById(targetId).innerText = `⚠️ Failed to invoke ${name}.`;
+      }
+    }
+
+    invokeGlyph("chakraGlyph", "chakraSeal");
+    invokeGlyph("IgnisVow", "ignisSeal");
+
+    // Dynamic glyph manifest
+    fetch("glyphRegistry.json")
+      .then(res => res.json())
+      .then(glyphs => {
+        const container = document.getElementById("glyph-manifest");
+        glyphs.forEach(glyph => {
+          const wrapper = document.createElement("div");
+          wrapper.className = "glyph-wrapper";
+
+          const img = document.createElement("img");
+          img.src = glyph.path;
+          img.alt = glyph.name;
+          img.title = `${glyph.name} — ${glyph.intention}`;
+          img.className = "glyph-preview";
+
+          const label = document.createElement("p");
+          label.textContent = `${glyph.name} (${glyph.lineage})`;
+          label.className = "glyph-label";
+
+          wrapper.appendChild(img);
+          wrapper.appendChild(label);
+          container.appendChild(wrapper);
+        });
+      })
+      .catch(err => {
+        console.error("🛑 Failed to load glyph registry:", err);
+      });
+  </script>
 </body>
 </html>
