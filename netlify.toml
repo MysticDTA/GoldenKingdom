@@ -1,10 +1,10 @@
-# This is the build configuration for your Next.js site.
+# Build settings for your Next.js application
 [build]
-  # This tells Netlify that your Next.js app is inside the "platform" folder.
+  # Tell Netlify that your app is in the "platform" subfolder.
   base = "platform"
 
-  # This is the command Netlify will run to build your site.
+  # The command to build your Next.js site.
   command = "npm run build"
 
-  # This is the folder Netlify will deploy after the build is finished.
+  # The folder that contains the finished site.
   publish = ".next"
