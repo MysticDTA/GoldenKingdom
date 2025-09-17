@@ -1,18 +1,19 @@
 #!/bin/bash
 
-# 1️⃣ Push changes to GitHub
+# === CONFIG ===
+SITE_URL="https://your-netlify-site.netlify.app"  # Replace with your Netlify URL
+WAIT_TIME=15  # seconds to wait after pushing before checking
+
+# === PUSH LOCAL CHANGES ===
+echo "🌀 Pushing local changes..."
 git add .
 git commit -m "Update scrolls, glyphs, and SVGs"
 git push
 
-# 2️⃣ Wait a few seconds for Netlify to start the build
-echo "Waiting 10 seconds for Netlify to start deployment..."
-sleep 10
+echo "⏳ Waiting $WAIT_TIME seconds for Netlify to start deployment..."
+sleep $WAIT_TIME
 
-# 3️⃣ Check live assets
-SITE_URL="https://your-netlify-site.netlify.app"
-
-# List of key files on the live site
+# === FILES TO CHECK ===
 FILES=(
   "index.html"
   "sanctuary.html"
@@ -32,9 +33,10 @@ FILES=(
   "svg/sanctuaryGlyph.svg"
 )
 
-echo -e "\nChecking live Netlify assets..."
+echo -e "\n🔍 Checking live Netlify assets..."
 for f in "${FILES[@]}"; do
-  URL="$SITE_URL/$f"
+  # Encode spaces in URL
+  URL="$SITE_URL/$(echo "$f" | sed 's/ /%20/g')"
   STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
   if [ "$STATUS" = "200" ]; then
     echo "[OK] $f is live"
@@ -42,3 +44,5 @@ for f in "${FILES[@]}"; do
     echo "[MISSING] $f returned HTTP $STATUS"
   fi
 done
+
+echo -e "\n✅ Check complete."
