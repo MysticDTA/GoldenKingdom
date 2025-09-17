@@ -1,6 +1,16 @@
+# This is the build configuration for your Next.js site.
 [build]
-publish = "public"
-command = "deno run --allow-read --allow-write scripts/setup.sh"  # or your actual build command
+  # This tells Netlify where your Next.js app is located.
+  base = "platform"
 
-[functions]
-directory = "netlify/functions"/
+  # This is the command Netlify will run to build your site.
+  command = "npm run build"
+
+  # This is the folder Netlify will deploy after the build is finished.
+  publish = "platform/.next"
+
+# This redirects all traffic to the Next.js app.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
