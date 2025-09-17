@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
-  <g id="DivineTruthAscension">
-  <circle cx="500" cy="500" r="420" fill="none" stroke="gold" stroke-width="18"/>
-  <!-- shortened for test -->
-  <circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="none" />
-  <path d="M50,10 Q70,50 50,90 Q30,50 50,10" stroke="black" stroke-width="2" fill="none" />
-  </g>
-</svg>
