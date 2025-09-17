@@ -1,0 +1,135 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at center, #000010, #020111, #0a0f1f);
+  color: #f8f8ff;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+header.hero {
+  padding: 2rem 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.phoenix-mandala-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 350px;
+  height: 350px;
+}
+
+.mandala-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.8;
+  animation: mandalaPulse 12s infinite ease-in-out,
+             mandalaRotate 60s infinite linear;
+}
+
+.phoenix-image {
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  height: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 20px #6cf;
+  border-radius: 12px;
+}
+
+.invocation {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  opacity: 0.9;
+}
+
+.ritual-section {
+  margin: 2rem 0;
+}
+
+button#startBreath {
+  background: linear-gradient(90deg, #ff9933, #ff33cc);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 0 15px #ff66ff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+button#startBreath:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #ff99ff;
+}
+
+nav {
+  margin: 2rem 0;
+}
+nav a {
+  margin: 0 1rem;
+  color: #aaf;
+  text-decoration: none;
+  font-weight: bold;
+}
+nav a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  margin-top: 3rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* 🔮 Animations */
+@keyframes mandalaPulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+@keyframes mandalaRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+/* 🌙 Coming Soon Page */
+body.coming-soon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: radial-gradient(circle, #0a0f2c, #000);
+  color: #fff;
+  text-align: center;
+}
+
+.coming-container {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(108, 204, 255, 0.5);
+}
+
+.coming-container h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #6cf;
+}
+
+.coming-container button {
+  margin-top: 1rem;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background: #6cf;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
