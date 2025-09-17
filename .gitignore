@@ -6,3 +6,15 @@ node_modules/
 # DTA ignores
 .DTA_release_png/
 *.log
+
+# Dependencies
+/node_modules
+
+# Next.js build output
+/.next/
+/out/
+
+# Other
+.DS_Store
+*.pem
+
