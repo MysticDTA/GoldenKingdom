@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("DTA_assets/glyphRegistry.json")
+  fetch("DTA_assets/DTA_assets/glyphRegistry.json")
     .then(res => res.json())
     .then(glyphs => {
       const container = document.getElementById("glyph-manifest");
