@@ -1,16 +1,10 @@
 # This is the build configuration for your Next.js site.
 [build]
-  # This tells Netlify where your Next.js app is located.
+  # This tells Netlify that your Next.js app is inside the "platform" folder.
   base = "platform"
 
   # This is the command Netlify will run to build your site.
   command = "npm run build"
 
   # This is the folder Netlify will deploy after the build is finished.
-  publish = "platform/.next"
-
-# This redirects all traffic to the Next.js app.
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  publish = ".next"
