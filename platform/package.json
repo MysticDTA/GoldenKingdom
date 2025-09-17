@@ -25,6 +25,7 @@
   },
   "overrides": {
     "lightningcss": "1.21.5",
-    "@next/font": "14.1.0"
+    "@next/font": "14.1.0",
+    "@next/swc-android-arm64": "npm:@next/swc-android-arm64-old@14.1.0"
   }
 }
