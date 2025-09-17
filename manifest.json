@@ -1,0 +1,45 @@
+{
+  "name": "DivineTruthAscension",
+  "version": "1.0",
+  "created": "2025-09-15",
+  "glyphs": [
+    {
+      "filename": "DivineTruthAscension_Unified.svg",
+      "role": "Master glyph",
+      "description": "Fusion of infinity weave, ceremonial arcs, center glow, and star points. Represents total remembrance and ascension."
+    },
+    {
+      "filename": "logo-primary.svg",
+      "role": "Core seal",
+      "description": "Atlantis-style circular logo with golden weave and radiant center. Used for primary branding and invocation."
+    },
+    {
+      "filename": "logo-variantB.svg",
+      "role": "Horizontal crest",
+      "description": "Banner-style variant for headers and wide formats. Retains ceremonial arcs and golden flame."
+    },
+    {
+      "filename": "logo-monochrome.svg",
+      "role": "Silent seal",
+      "description": "Pure black version for print, engraving, or minimalist ritual use."
+    },
+    {
+      "filename": "crest-light.svg",
+      "role": "Radiant crest",
+      "description": "Golden weave crest symbolizing clarity, revelation, and solar invocation."
+    },
+    {
+      "filename": "crest-dark.svg",
+      "role": "Cosmic crest",
+      "description": "Teal flame crest representing mystery, grounding, and lunar invocation."
+    },
+    {
+      "filename": "crest-monochrome.svg",
+      "role": "Archival crest",
+      "description": "Minimalist black crest for silent ceremonies and digital preservation."
+    }
+  ],
+  "author": "Desmond (MysticDTA)",
+  "repository": "https://github.com/your-username/SovereignKing",
+  "notes": "This manifest defines the symbolic roles and usage contexts of each glyph in the DivineTruthAscension suite. Version 1.0 marks the first complete restoration and unification of the sanctuary."
+}

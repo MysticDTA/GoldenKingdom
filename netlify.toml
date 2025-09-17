@@ -1,3 +1,6 @@
 [build]
-  publish = "public"
-  command = "deno run --allow-read --allow-write scripts/optimise-glyphs.ts"
+publish = "public"
+command = "deno run --allow-read --allow-write scripts/setup.sh"
+
+[functions]
+directory = "netlify/functions"

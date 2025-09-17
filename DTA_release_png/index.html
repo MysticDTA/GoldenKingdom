@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DivineTruthAscension Sanctuary</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle, #fdf6e3, #e0e0e0);
+      color: #333;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    object#unified-seal {
+      margin: 1rem auto;
+      display: block;
+      width: 400px;
+      animation: pulseGlow 4s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%   { filter: drop-shadow(0 0 0px #888); transform: scale(1); }
+      50%  { filter: drop-shadow(0 0 12px #6a00ff); transform: scale(1.03); }
+      100% { filter: drop-shadow(0 0 0px #888); transform: scale(1); }
+    }
+
+    #daily-sigil, #glyph-carousel {
+      margin-top: 3rem;
+    }
+
+    #sigil-container {
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px dashed #999;
+      background-color: #fff;
+    }
+
+    #refresh-btn {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      background-color: #ddd;
+      border: none;
+      border-radius: 4px;
+    }
+
+    select {
+      margin: 0.5rem;
+      padding: 0.3rem;
+      font-size: 1rem;
+    }
+
+    label {
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+
+    #carousel-container {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      padding: 1rem;
+      border-top: 1px solid #ccc;
+    }
+
+    .glyph-card {
+      flex: 0 0 auto;
+      width: 220px;
+      padding: 1rem;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      text-align: center;
+      animation: pulseGlow 6s infinite ease-in-out;
+      cursor: pointer;
+    }
+
+    .glyph-card object {
+      width: 180px;
+      margin-bottom: 0.5rem;
+    }
+
+    #spotlight-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    #spotlight-content {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 600px;
+      animation: pulseGlow 3s infinite ease-in-out;
+      position: relative;
+    }
+
+    #spotlight-glyph {
+      width: 300px;
+      margin-bottom: 1rem;
+    }
+
+    #spotlight-meta p {
+      margin: 0.5rem 0;
+      font-size: 1rem;
+    }
+
+    #close-spotlight {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #444;
+      color: #fff;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌀 DivineTruthAscension</h1>
+  <p>Welcome to the living sanctuary. Every glyph is a memory. Every invocation is a breath.</p>
+
+  <object id="unified-seal" type="image/svg+xml" data="svg/DivineTruthAscension_Unified.svg"></object>
+
+  <section id="daily-sigil">
+    <h2>🪄 Daily Glyph</h2>
+    <label for="energy-filter">Energy:</label>
+    <select id="energy-filter">
+      <option value="any">Any</option>
+      <option value="solar">Solar</option>
+      <option value="lunar">Lunar</option>
+      <option value="neutral">Neutral</option>
+    </select>
+
+    <label for="lineage-filter">Lineage:</label>
+    <select id="lineage-filter">
+      <option value="any">Any</option>
+      <option value="Ancestral crest">Ancestral crest</option>
+      <option value="Celestial seal">Celestial seal</option>
+      <option value="Mystic glyph">Mystic glyph</option>
+    </select>
+
+    <div id="sigil-container">Invoking...</div>
+    <button id="refresh-btn">Refresh Sigil</button>
+  </section>
+
+  <section id="glyph-carousel">
+    <h2>🔁 Glyph Spiral</h2>
+    <div id="carousel-container">Loading glyphs...</div>
+  </section>
+
+  <div id="spotlight-overlay">
+    <div id="spotlight-content">
+      <button id="close-spotlight">✖</button>
+      <object id="spotlight-glyph" type="image/svg+xml"></object>
+      <div id="spotlight-meta"></div>
+    </div>
+  </div>
+
+  <script>
+    function showSpotlight(glyph) {
+      document.getElementById("spotlight-glyph").data = glyph.filename;
+      document.getElementById("spotlight-meta").innerHTML = `
+        <p><strong>Role:</strong> ${glyph.role}</p>
+        <p><strong>Energy:</strong> ${glyph.energy}</p>
+        <p><strong>State:</strong> ${glyph.state}</p>
+        <p><strong>Lineage:</strong> ${glyph.lineage}</p>
+        <p><strong>Created:</strong> ${glyph.created}</p>
+      `;
+      document.getElementById("spotlight-overlay").style.display = "flex";
+    }
+
+    document.getElementById("close-spotlight").addEventListener("click", () => {
+      document.getElementById("spotlight-overlay").style.display = "none";
+    });
+
+    function invokeSigil() {
+      const energy = document.getElementById("energy-filter").value;
+      const lineage = document.getElementById("lineage-filter").value;
+
+      fetch("/glyphs.json")
+        .then(res => res.json())
+        .then(data => {
+          let glyphs = data.glyphs;
+
+          if (energy !== "any") {
+            glyphs = glyphs.filter(g => g.energy.toLowerCase() === energy);
+          }
+          if (lineage !== "any") {
+            glyphs = glyphs.filter(g => g.lineage === lineage);
+          }
+
+          const container = document.getElementById("sigil-container");
+          const carousel = document.getElementById("carousel-container");
+
+          if (glyphs.length === 0) {
+            container.innerText = "No glyphs match this filter.";
+            carousel.innerText = "No glyphs to display.";
+            return;
+          }
+
+          const sigil = glyphs[Math.floor(Math.random() * glyphs.length)];
+          container.innerHTML = `
+            <p><strong>Role:</strong> ${sigil.role}</p>
+            <p><strong>Energy:</strong> ${sigil.energy}</p>
+            <p><strong>State:</strong> ${sigil.state}</p>
+            <p><strong>Lineage:</strong> ${sigil.lineage}</p>
+            <p><strong>Created:</strong> ${sigil.created}</p>
+            <object type="image/svg+xml" data="${sigil.filename}" width="300"></object>
+          `;
+
+          carousel.innerHTML = glyphs.map(g => `
+            <div class="glyph-card" onclick='showSpotlight(${JSON.stringify(g).replace(/'/g, "&apos;")})'>
+              <object type="image/svg+xml" data="${g.filename}"></object>
+              <p><strong>${g.role}</strong></p>
+              <p>${g.energy} • ${g.lineage}</p>
+            </div>
+          `).join('');
+        })
+        .catch(() => {
+          document.getElementById("sigil-container").innerText = "Failed to invoke glyph.";
+          document.getElementById("carousel-container").innerText = "Failed to load carousel.";
+        });
+    }
+
+    document.getElementById("refresh-btn").addEventListener("click", invokeSigil);
+    document.getElementById("energy-filter").addEventListener("change", invokeSigil);
+    document.getElement
