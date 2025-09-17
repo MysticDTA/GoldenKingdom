@@ -9,11 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.57.4",
+    "axios": "^1.12.2",
+    "dotenv": "^17.2.2",
     "next": "^14.2.32",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@swc/core": "^1.13.5",
     "autoprefixer": "^10.4.21",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
