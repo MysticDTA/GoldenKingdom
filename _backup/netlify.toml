@@ -1,6 +1,0 @@
-[build]
-publish = "public"
-command = "deno run --allow-read --allow-write scripts/setup.sh"  # or your actual build command
-
-[functions]
-directory = "netlify/functions"/
