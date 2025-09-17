@@ -1,21 +1,21 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # check_netlify_assets.sh
-# Checks live URLs of public folder assets on Netlify
+# Checks if all assets in the public folder are live on Netlify
 
-# Replace with your Netlify site URL
+# Set your Netlify site URL here
 NETLIFY_URL="https://your-site-name.netlify.app"
 
 echo "⏳ Checking live Netlify assets at $NETLIFY_URL ..."
 
-# Function to check each file
+# Function to check a file
 check_file() {
-    local file_path="$1"
-    local url="$NETLIFY_URL/${file_path#public/}"
-    status=$(curl -o /dev/null -s -w "%{http_code}" "$url")
-    if [[ "$status" == "200" ]]; then
-        echo "[OK]     $file_path"
+    local file=$1
+    local url="$NETLIFY_URL/${file#public/}"  # remove 'public/' prefix
+    http_status=$(curl -s -o /dev/null -w "%{http_code}" "$url")
+    if [[ "$http_status" == "200" ]]; then
+        echo "[OK] $file is live"
     else
-        echo "[MISSING] $file_path returned HTTP $status"
+        echo "[MISSING] $file returned HTTP $http_status"
     fi
 }
 
@@ -31,4 +31,5 @@ find public -type f -name "*.json" | sort | while read f; do check_file "$f"; do
 echo -e "\n=== SVG Assets (.svg) ==="
 find public -type f -name "*.svg" | sort | while read f; do check_file "$f"; done
 
+# Optional: other static assets
 echo -e "\n✅ Check complete."
