@@ -1,48 +1,33 @@
 #!/bin/bash
+# Termux-friendly deploy script for GoldenKingdom
 
-# === CONFIG ===
-SITE_URL="https://your-netlify-site.netlify.app"  # Replace with your Netlify URL
-WAIT_TIME=15  # seconds to wait after pushing before checking
+# 1️⃣ Ensure we are in repo root
+cd ~/GoldenKingdom || { echo "Repo not found"; exit 1; }
 
-# === PUSH LOCAL CHANGES ===
-echo "🌀 Pushing local changes..."
+# 2️⃣ Checkout merge-sovereign
+git checkout merge-sovereign
+
+# 3️⃣ Pull latest changes just in case
+git pull origin merge-sovereign
+
+# 4️⃣ Add and commit any new changes
 git add .
-git commit -m "Update scrolls, glyphs, and SVGs"
-git push
+git commit -m "Auto-commit before deploy" 2>/dev/null || echo "No changes to commit"
 
-echo "⏳ Waiting $WAIT_TIME seconds for Netlify to start deployment..."
-sleep $WAIT_TIME
+# 5️⃣ Push to GitHub
+git push origin merge-sovereign
 
-# === FILES TO CHECK ===
-FILES=(
-  "index.html"
-  "sanctuary.html"
-  "manifest.html"
-  "IgnisVow.json"
-  "chakraGlyph.json"
-  "glyphRegistry.json"
-  "CelestialGrid.svg"
-  "IgnisVow.svg"
-  "chakraGlyph.svg"
-  "svg/glyph-preview.svg"
-  "svg/glyph-preview2.svg"
-  "svg/glyphConstellation.svg"
-  "svg/h8vexsr01 (1).svg"
-  "svg/logo (3) (1).svg"
-  "svg/logo.svg"
-  "svg/sanctuaryGlyph.svg"
-)
+# 6️⃣ Wait for Netlify to detect Git push and deploy (adjust time if needed)
+echo "⏳ Waiting 30 seconds for Netlify to start deployment..."
+sleep 30
 
-echo -e "\n🔍 Checking live Netlify assets..."
-for f in "${FILES[@]}"; do
-  # Encode spaces in URL
-  URL="$SITE_URL/$(echo "$f" | sed 's/ /%20/g')"
-  STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
-  if [ "$STATUS" = "200" ]; then
-    echo "[OK] $f is live"
-  else
-    echo "[MISSING] $f returned HTTP $STATUS"
-  fi
-done
+# 7️⃣ Check live assets using your existing script
+if [ -f ./check_netlify.sh ]; then
+    ./check_netlify.sh
+else
+    echo "❌ check_netlify.sh not found!"
+fi
 
-echo -e "\n✅ Check complete."
+# 8️⃣ List all deployed assets for confirmation
+echo -e "\n📂 Public folder structure:"
+find public -type f | sort
