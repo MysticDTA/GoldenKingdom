@@ -4,11 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "node -e \"if (process.platform === 'android') process.env.NEXT_DISABLE_SWC='1'; require('child_process').spawnSync('next', ['build'], { stdio: 'inherit' });\"",
-    "start": "next start",
-    "lint": "next lint",
-    "precommit-check": "node scripts/check-env.js"
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint"
+}
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.1",
