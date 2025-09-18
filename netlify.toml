@@ -1,15 +1,13 @@
-# This configuration file should be at: /platform/netlify.toml
-
 [build]
-  # The command to run to build your site.
-  # This command is executed from within the /platform directory.
-  command = "deno run --allow-read --allow-write scripts/optimise-glyphs.ts"
+  base = "platform"
+  command = "npm run build"
+  publish = ".next"
 
-  # The directory (relative to the /platform directory) that contains
-  # the finished site to be deployed.
-  publish = "public"
+[build.environment]
+  NODE_VERSION = "22"
+  NEXT_PUBLIC_SUPABASE_URL = "https://your-project-id.supabase.co"
+  NEXT_PUBLIC_SUPABASE_ANON_KEY = "your-anon-key"
+  SUPABASE_SERVICE_ROLE_KEY = "your-service-role-key"
 
 [functions]
-  # The directory for your serverless functions, relative to the /platform directory.
-  directory = "functions"
-
+  directory = "netlify/functions"
