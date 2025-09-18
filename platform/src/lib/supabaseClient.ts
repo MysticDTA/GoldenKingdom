@@ -1,10 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Replace with your actual Supabase project URL
-const supabaseUrl = 'https://bjyqsebouppdrgjnpblu.supabase.co';
+// Load from environment variables
+const supabaseUrl = process.env.SUPABASE_URL as string;
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY as string;
 
-// Replace with your actual Supabase anon public key
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...';
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error(
+    "Missing Supabase environment variables. Please set SUPABASE_URL and SUPABASE_ANON_KEY."
+  );
+}
 
-// Create the client
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
