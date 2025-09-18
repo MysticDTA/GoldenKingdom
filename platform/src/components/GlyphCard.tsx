@@ -2,28 +2,29 @@ import Image from 'next/image';
 import Link from 'next/link'; // Import the Link component
 import type { Glyph } from '@/lib';
 
+type Glyph = {
+  id: string
+  name: string
+  description?: string
+  imageUrl?: string
+}
+
 export default function GlyphCard({ glyph }: { glyph: Glyph }) {
   return (
-    // This Link component makes the whole card clickable
-    <Link href={`/glyphs/${glyph.id}`} className="w-full max-w-xl mb-12 transform hover:scale-105 transition-transform duration-300">
-      <div className="text-center p-8 bg-white shadow-xl rounded-lg border border-gray-200">
-        <Image 
-          src={glyph.image}
+    <div className="rounded-xl border border-gray-200 dark:border-gray-800 p-4 shadow-sm">
+      <h3 className="text-lg font-semibold mb-2">{glyph.name}</h3>
+      {glyph.imageUrl && (
+        <img
+          src={glyph.imageUrl}
           alt={glyph.name}
-          width={150}
-          height={150}
-          className="mx-auto rounded-full border-4 border-gray-100 p-1 shadow-md"
+          className="w-full h-40 object-cover rounded-md mb-3"
         />
-        <h1 className="mt-6 text-4xl font-bold font-serif text-gray-800">
-          {glyph.name}
-        </h1>
-        <p className="mt-2 text-lg italic text-gray-600">
-          {glyph.intention}
+      )}
+      {glyph.description && (
+        <p className="text-sm text-gray-600 dark:text-gray-300">
+          {glyph.description}
         </p>
-        <p className="mt-6 text-left text-base leading-relaxed text-gray-700">
-          {glyph.symbolism}
-        </p>
-      </div>
-    </Link>
-  );
+      )}
+    </div>
+  )
 }
