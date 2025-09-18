@@ -1,13 +1,11 @@
+const path = require('path');
+
 /** @type {import('next').NextConfig} */
-
-// Detect if running inside Termux (Android)
-const isTermux = process.platform === "android";
-
 const nextConfig = {
-  reactStrictMode: true,
-
-  // Disable SWC only on Termux, use Babel instead
-  swcMinify: !isTermux,
+  webpack: (config) => {
+    config.resolve.alias['@'] = path.resolve(__dirname, 'src');
+    return config;
+  }
 };
 
 module.exports = nextConfig;
