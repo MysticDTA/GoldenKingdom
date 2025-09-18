@@ -1,7 +1,7 @@
 console.log("🛠️ Starting glyph optimization ritual...");
 
 import { optimize } from "npm:svgo";
-import { walk } from "https://deno.land/std/fs/walk.ts";
+import { walk, ensureDir } from "https://deno.land/std@0.224.0/fs/mod.ts";
 
 const glyphFolder = "public/svg";
 
