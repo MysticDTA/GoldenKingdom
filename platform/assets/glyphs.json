@@ -1,0 +1,18 @@
+[
+  {
+    "name": "SunGlyph",
+    "originalSize": 1024,
+    "optimisedSize": 512,
+    "lineage": "GoldenKingdom",
+    "image_url": "/assets/glyphs-optimised/sun.svg",
+    "description": "Radiates clarity and warmth"
+  },
+  {
+    "name": "MoonGlyph",
+    "originalSize": 980,
+    "optimisedSize": 490,
+    "lineage": "DivineTruthAscension",
+    "image_url": "/assets/glyphs-optimised/moon.svg",
+    "description": "Reflects mystery and intuition"
+  }
+]

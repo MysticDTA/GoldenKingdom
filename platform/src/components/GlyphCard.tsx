@@ -1,12 +1,11 @@
-// src/components/GlyphCard.tsx
-import Image from 'next/image'
-import Link from 'next/link'
-import type { Glyph } from '@/lib'
+import Image from 'next/image';
+import Link from 'next/link';
+import type { Glyph } from '@/lib';
 
 export default function GlyphCard({ glyph }: { glyph: Glyph }) {
   return (
-    <div className="glyph-card">
-      <h2>{glyph.name}</h2>
+    <div className="glyph-card border p-4 rounded shadow-md">
+      <h2 className="text-xl font-semibold mb-2">{glyph.name}</h2>
 
       {glyph.image_url && (
         <Image
@@ -14,12 +13,19 @@ export default function GlyphCard({ glyph }: { glyph: Glyph }) {
           alt={glyph.name}
           width={200}
           height={200}
+          className="mb-2"
         />
       )}
 
-      {glyph.description && <p>{glyph.description}</p>}
+      {glyph.description && (
+        <p className="text-gray-700 mb-2">{glyph.description}</p>
+      )}
 
-      <Link href={`/glyphs/${glyph.id}`}>View details</Link>
+      {glyph.link && (
+        <Link href={glyph.link} className="text-blue-600 underline">
+          Explore glyph
+        </Link>
+      )}
     </div>
-  )
+  );
 }
