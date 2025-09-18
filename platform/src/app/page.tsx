@@ -1,5 +1,4 @@
 // Import our data and our NEW GlyphCard component
-import { sacredGlyphs } from '@/lib';
 import GlyphCard from '@/components/GlyphCard';
 
 // Look how simple and clean the homepage is now!
