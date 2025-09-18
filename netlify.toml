@@ -1,20 +1,10 @@
 [build]
   base    = "platform"
   command = "deno run --allow-read --allow-write scripts/optimise-glyphs.ts && npm run build"
-  publish = "platform/.next"
+  publish = ".next"
 
 [build.environment]
   NODE_VERSION = "22"
-  NEXT_PUBLIC_SUPABASE_URL = ""      # <-- fill with your Supabase project URL
-  NEXT_PUBLIC_SUPABASE_ANON_KEY = "" # <-- fill with your Supabase anon key
-  SUPABASE_SERVICE_ROLE_KEY = ""     # <-- optional: only if you use it on server
-
-# If you want Netlify Functions, uncomment this and make sure the folder exists:
-# [functions]
-#   directory = "platform/netlify/functions"
-
-# Redirects (optional, useful for Next.js apps with dynamic routes)
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  NEXT_PUBLIC_SUPABASE_URL = ""      # fill in your Supabase URL
+  NEXT_PUBLIC_SUPABASE_ANON_KEY = "" # fill in your Supabase anon key
+  SUPABASE_SERVICE_ROLE_KEY = ""     # optional if you use it
