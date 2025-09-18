@@ -1,7 +1,9 @@
 [build]
   base = "platform"
-  command = "npm run gen:types && npm run build"
+  command = "npm run build"
   publish = ".next"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "22"
+  NEXT_PUBLIC_SUPABASE_URL = "https://your-project-id.supabase.co"
+  NEXT_PUBLIC_SUPABASE_ANON_KEY = "your-anon-key"
