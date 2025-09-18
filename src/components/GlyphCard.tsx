@@ -1,3 +1,4 @@
+// src/components/GlyphCard.tsx
 import React from "react";
 
 interface GlyphCardProps {
