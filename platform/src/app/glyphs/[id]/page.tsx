@@ -1,23 +1,19 @@
-import { notFound } from "next/navigation"
+// src/app/glyphs/[id]/page.tsx
+import type { Glyph } from '@/lib'
 
-interface GlyphPageProps {
-  params: { id: string }
-}
-
-export default function GlyphPage({ params }: GlyphPageProps) {
-  const { id } = params
-
-  if (!id) {
-    notFound()
+export default function GlyphPage({ params }: { params: { id: string } }) {
+  const glyph: Glyph = {
+    id: params.id,
+    name: 'Solar Flame',
+    description: 'Example glyph detail',
+    image_url: null,
+    created_at: new Date().toISOString(),
   }
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-[var(--background)] text-[var(--foreground)] p-8">
-      <h1 className="text-4xl font-bold mb-4">🔮 Glyph: {id}</h1>
-      <p className="text-lg text-center max-w-xl">
-        This is the dynamic glyph page for <code>{id}</code>.  
-        You can customize this to fetch data from Supabase or render glyph details.
-      </p>
+    <main>
+      <h1>{glyph.name}</h1>
+      <p>{glyph.description}</p>
     </main>
   )
 }

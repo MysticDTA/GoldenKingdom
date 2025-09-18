@@ -1,33 +1,33 @@
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-[var(--background)] text-[var(--foreground)] px-6">
-      <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center">
-        ⚡ Golden Kingdom
-      </h1>
-      <p className="text-lg md:text-xl text-center max-w-2xl leading-relaxed">
-        Welcome to <span className="font-semibold">Sovereign Creation</span> —  
-        a platform for truth, ascension, and cosmic alignment.
-      </p>
+// src/app/page.tsx
+import type { Glyph } from '@/lib'
+import GlyphCard from '@/components/GlyphCard'
 
-      <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-4xl">
-        <div className="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm bg-white/70 dark:bg-black/30 backdrop-blur">
-          <h2 className="text-xl font-semibold mb-2">🌌 Ascension</h2>
-          <p className="text-sm">
-            Embody your higher self and align with cosmic truth.
-          </p>
-        </div>
-        <div className="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm bg-white/70 dark:bg-black/30 backdrop-blur">
-          <h2 className="text-xl font-semibold mb-2">🔥 Sovereignty</h2>
-          <p className="text-sm">
-            Reclaim your kingdom with love, gratitude, and discernment.
-          </p>
-        </div>
-        <div className="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm bg-white/70 dark:bg-black/30 backdrop-blur">
-          <h2 className="text-xl font-semibold mb-2">💎 Creation</h2>
-          <p className="text-sm">
-            Manifest abundance, prosperity, and unity with Source.
-          </p>
-        </div>
+export default function Page() {
+  // Demo glyphs — replace with Supabase fetch later
+  const glyphs: Glyph[] = [
+    {
+      id: '1',
+      name: 'Solar Flame',
+      description: 'Example glyph',
+      image_url: null,
+      created_at: new Date().toISOString(),
+    },
+    {
+      id: '2',
+      name: 'Celestial Wave',
+      description: 'Another glyph',
+      image_url: null,
+      created_at: new Date().toISOString(),
+    },
+  ]
+
+  return (
+    <main>
+      <h1>Glyphs</h1>
+      <div className="glyph-list">
+        {glyphs.map((glyph) => (
+          <GlyphCard key={glyph.id} glyph={glyph} />
+        ))}
       </div>
     </main>
   )
