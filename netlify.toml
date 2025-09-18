@@ -1,6 +1,6 @@
 [build]
   base = "platform"
-  command = "npm run build"
+  command = "npm run gen:types && npm run build"
   publish = "platform/.next"
 
 [build.environment]
