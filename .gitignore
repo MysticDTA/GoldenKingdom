@@ -31,3 +31,6 @@ Thumbs.db
 
 # ✅ Keep Next.js type definitions tracked
 # (Important: do NOT ignore next-env.d.ts)
+# Ignore Deno lockfiles
+deno.lock
+platform/deno.lock
