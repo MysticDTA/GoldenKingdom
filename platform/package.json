@@ -2,12 +2,12 @@
   "name": "golden-kingdom-platform",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node -e \"if (process.platform === 'android') process.env.NEXT_DISABLE_SWC='1'; require('child_process').spawnSync('next', ['build'], { stdio: 'inherit' });\"",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky",
     "precommit-check": "node scripts/check-env.js"
   },
   "dependencies": {
@@ -21,12 +21,9 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "autoprefixer": "^10.4.21",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.3",
-    "husky": "^9.0.11",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.17",
-    "typescript": "^5"
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.4.0"
   }
 }
