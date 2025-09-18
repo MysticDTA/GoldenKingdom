@@ -1,10 +1,15 @@
+# Build settings for your Next.js application
 [build]
-  base    = "platform"
-  command = "deno run --allow-read --allow-write scripts/optimise-glyphs.ts && npm run build"
+  # Tell Netlify that your app is in the "platform" subfolder.
+  base = "platform"
+
+  # The command to build your Next.js site.
+  # We are only running the essential build command.
+  command = "npm run build"
+
+  # The folder that contains the finished site.
   publish = ".next"
 
+# Set a stable Node.js version for the build environment.
 [build.environment]
-  NODE_VERSION = "22"
-  NEXT_PUBLIC_SUPABASE_URL = ""      # fill in your Supabase URL
-  NEXT_PUBLIC_SUPABASE_ANON_KEY = "" # fill in your Supabase anon key
-  SUPABASE_SERVICE_ROLE_KEY = ""     # optional if you use it
+  NODE_VERSION = "20"
