@@ -32,7 +32,7 @@ export default function LoginPage() {
     } else {
       setMessage('Sign in successful! Redirecting...');
       // In a real app, you would redirect the user here.
-      // window.location.href = '/'; 
+      // For now, we'll just show a message.
     }
   };
 
@@ -72,4 +72,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
