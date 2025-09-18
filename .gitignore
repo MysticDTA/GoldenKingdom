@@ -1,25 +1,33 @@
-# GoldenKingdom ignores
-public/svg/svg-*.zip
-node_modules/
-.DS_Store
-# Ignore real environment files
-.env*
-!.env.local.example
-# DTA ignores
-.DTA_release_png/
-*.log
-
 # Dependencies
-/node_modules
+node_modules
+package-lock.json
 
-# Next.js build output
-/.next/
-/out/
+# Build outputs
+.next
+out
+dist
 
-# Other
+# Env files (never commit secrets)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / Editor files
 .DS_Store
-*.pem
+Thumbs.db
+*.swp
 
-golden-kingdom-platform@0.1.0
-mm0m
-next
+# Netlify / Vercel build cache
+.netlify
+.vercel
+
+# ✅ Keep Next.js type definitions tracked
+# (Important: do NOT ignore next-env.d.ts)
