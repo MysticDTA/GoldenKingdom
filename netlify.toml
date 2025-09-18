@@ -5,11 +5,3 @@
 
 [build.environment]
   NODE_VERSION = "20"
-
-  # These should already be set in Netlify → Site settings → Environment variables
-  NEXT_PUBLIC_SUPABASE_URL = "env:NEXT_PUBLIC_SUPABASE_URL"
-  NEXT_PUBLIC_SUPABASE_ANON_KEY = "env:NEXT_PUBLIC_SUPABASE_ANON_KEY"
-  SUPABASE_SERVICE_ROLE_KEY = "env:SUPABASE_SERVICE_ROLE_KEY"
-
-[[plugins]]
-  package = "@netlify/plugin-functions-install-core"
