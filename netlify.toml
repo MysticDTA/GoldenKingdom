@@ -4,7 +4,6 @@
   base = "platform"
 
   # The command to build your Next.js site.
-  # We are only running the essential build command.
   command = "npm run build"
 
   # The folder that contains the finished site.
