@@ -1,0 +1,29 @@
+name: Generate Supabase Types
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  gen-types:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Install Supabase CLI
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      # Generate types from Supabase schema
+      - run: supabase gen types typescript --project-id ${{ secrets.SUPABASE_PROJECT_REF }} > platform/src/lib/database.types.ts
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+
+      # Commit updated types back to repo
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update Supabase types"
+          branch: main
