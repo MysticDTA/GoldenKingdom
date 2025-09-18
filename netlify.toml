@@ -1,7 +1,6 @@
 [build]
   base = "platform"
-  command = "npm run build"
-  publish = ".next"
+  command = "deno run --allow-read --allow-write scripts/optimise-glyphs.ts && npm run build"
 
 [build.environment]
   NODE_VERSION = "22"
