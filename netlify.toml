@@ -1,1 +1,10 @@
+[build]
+  base = "."
+  command = "NEXT_DISABLE_SWC=1 npm run build"
+  publish = ".next"
 
+[functions]
+  directory = "netlify/functions"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
