@@ -13,20 +13,15 @@ node_modules/
 Thumbs.db
 *.swp
 
-# 🧪 Diagnostic Scripts
-check-sanctuary.sh
-
 # 📦 Package Managers
 .pnpm-store/
 .yarn/
-.npm/
 
-# 🧬 Subproject Outputs
-platform/.next/
-platform/out/
-platform/dist/
-platform/.netlify/
-platform/.vercel/
+# ⚡ Supabase CLI binaries and archives
+supabase
+supabase*.tar.gz
 
-/_backup/
-/_backup_root/
+# 🛠️ Build Outputs
+.next/
+out/
+dist/
