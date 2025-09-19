@@ -1,7 +1,13 @@
 ---
+layout: page
+title: Project Roadmap
+---
+
+# This is where your actual roadmap content begins...
 
 ### 📄 ROADMAP.md
-```markdown
+
+markdown
 # 🗺️ DivineTruthAscension Roadmap
 
 This document outlines the planned **features, expansions, and visions** for the DTA platform.  
