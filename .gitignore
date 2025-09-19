@@ -31,3 +31,5 @@ _backup_root/
 .env.local
 .env.local
 platform/.env.local
+platform/.env.local
+.env.local
