@@ -1,12 +1,16 @@
-import GlyphCard from './GlyphCard';
-import glyphs from '@/assets/glyphs.json';
+import GlyphCard from "@/components/GlyphCard";
+import { Glyph } from "@/lib/types";
+import glyphsData from "@/assets/glyphs.json";
 
 export default function GlyphIndex() {
+  // ✅ Cast JSON data to Glyph[]
+  const glyphs: Glyph[] = glyphsData as Glyph[];
+
   return (
-    <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {glyphs.map((glyph) => (
-        <GlyphCard key={glyph.name} glyph={glyph} />
+        <GlyphCard key={glyph.id} glyph={glyph} />
       ))}
-    </section>
+    </div>
   );
 }

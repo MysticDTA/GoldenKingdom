@@ -1,20 +1,30 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import type { Glyph } from '@/lib';
+import Image from "next/image";
+import Link from "next/link";
+import { Glyph } from "@/lib/types";
 
-export default function GlyphCard({ glyph }: { glyph: Glyph }) {
+interface GlyphCardProps {
+  glyph: Glyph;
+}
+
+export default function GlyphCard({ glyph }: GlyphCardProps) {
   return (
-    <div className="glyph-card border p-4 rounded shadow-md">
-      <h2 className="text-xl font-semibold mb-2">{glyph.name}</h2>
+    <div className="border rounded-lg p-4 shadow-md bg-white">
+      <h2 className="text-xl font-bold mb-2">{glyph.name}</h2>
 
       {glyph.image_url && (
-        <Image
-          src={glyph.image_url}
-          alt={glyph.name}
-          width={200}
-          height={200}
-          className="mb-2"
-        />
+        <div className="mb-2">
+          <Image
+            src={glyph.image_url}
+            alt={glyph.name ?? "Glyph"}
+            width={200}
+            height={200}
+            className="rounded"
+          />
+        </div>
+      )}
+
+      {glyph.meaning && (
+        <p className="text-gray-600 mb-2">{glyph.meaning}</p>
       )}
 
       {glyph.description && (
@@ -23,7 +33,7 @@ export default function GlyphCard({ glyph }: { glyph: Glyph }) {
 
       {glyph.link && (
         <Link href={glyph.link} className="text-blue-600 underline">
-          Explore glyph
+          Learn more
         </Link>
       )}
     </div>
