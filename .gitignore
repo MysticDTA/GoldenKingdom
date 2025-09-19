@@ -25,3 +25,6 @@ supabase*.tar.gz
 .next/
 out/
 dist/
+# 🔄 Local backup folders (ignore completely)
+_backup/
+_backup_root/
