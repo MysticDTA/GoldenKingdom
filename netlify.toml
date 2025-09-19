@@ -1,8 +1,7 @@
 [build]
   base = "platform"
-  command = "NEXT_DISABLE_SWC=1 npm run build"
+  command = "npm run build"
   publish = "platform/.next"
 
 [build.environment]
   NODE_VERSION = "22"
-  NEXT_DISABLE_SWC = "1"
