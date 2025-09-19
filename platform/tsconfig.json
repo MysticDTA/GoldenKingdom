@@ -16,12 +16,16 @@
     "incremental": true,
     "types": ["node"],
 
-    // ✅ add these:
+    // 🔑 Editor + build path support
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
   "exclude": ["node_modules"]
 }
