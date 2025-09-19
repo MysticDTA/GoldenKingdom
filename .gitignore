@@ -27,3 +27,6 @@ platform/out/
 platform/dist/
 platform/.netlify/
 platform/.vercel/
+
+/_backup/
+/_backup_root/
