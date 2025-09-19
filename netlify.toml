@@ -2,6 +2,7 @@
   base = "platform"
   command = "NEXT_DISABLE_SWC=1 npm run build"
   publish = "platform/.next"
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)docs/**' ':(exclude)scripts/**' ':(exclude)**/*.md'"
 
 [build.environment]
   NEXT_DISABLE_SWC = "1"
@@ -10,17 +11,11 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# Production (main branch)
 [context.production]
   environment = { NODE_ENV = "production" }
 
-# Deploy Previews (PRs)
 [context.deploy-preview]
   environment = { NODE_ENV = "development" }
 
-# Branch deploys (non-main branches)
 [context.branch-deploy]
   environment = { NODE_ENV = "development" }
-
-[build.ignore]
-  command = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)docs/**' ':(exclude)scripts/**' ':(exclude)**/*.md'"
