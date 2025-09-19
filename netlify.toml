@@ -3,15 +3,8 @@
   command = "npm run build"
   publish = "platform/.next"
 
-[build.environment]
-  NEXT_DISABLE_SWC = "1"
-  NODE_VERSION = "22"
+[functions]
+  directory = "platform/netlify/functions"
 
-[context.production.environment]
-  NODE_ENV = "production"
-
-[context.deploy-preview.environment]
-  NODE_ENV = "development"
-
-[context.branch-deploy.environment]
-  NODE_ENV = "development"
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
