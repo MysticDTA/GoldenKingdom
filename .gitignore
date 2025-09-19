@@ -28,3 +28,6 @@ dist/
 # 🔄 Local backup folders (ignore completely)
 _backup/
 _backup_root/
+.env.local
+.env.local
+platform/.env.local
