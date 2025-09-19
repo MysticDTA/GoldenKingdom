@@ -1,8 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 
-// Get values from environment variables
-const supabaseURL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-// Create a single Supabase client for the whole sanctuary
-export const supabase = createClient(supabaseURL, supabaseAnonKey);
+// Always use anon key for frontend.
+// On the server, you could swap to SUPABASE_SERVICE_ROLE_KEY if needed.
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);

@@ -1,20 +1,17 @@
-// platform/scripts/check-env.js
+// scripts/check-env.js
 
-// Env vars always required
-const required = [
+// Required environment variables
+const requiredVars = [
   "NEXT_PUBLIC_SUPABASE_URL",
-  "NEXT_PUBLIC_SUPABASE_ANON_KEY"
+  "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+  "SUPABASE_SERVICE_ROLE_KEY"
 ];
 
-// Only enforce Service Role in production (Netlify sets NODE_ENV=production)
-if (process.env.NODE_ENV === "production") {
-  required.push("SUPABASE_SERVICE_ROLE_KEY");
-}
+const missing = requiredVars.filter((key) => !process.env[key]);
 
-const missing = required.filter((key) => !process.env[key]);
-
-if (missing.length) {
-  console.error("❌ Missing environment variables:", missing.join(", "));
+if (missing.length > 0) {
+  console.error(`❌ Missing environment variables: ${missing.join(", ")}`);
+  console.error("👉 Check your .env.local for the full list of required variables.");
   process.exit(1);
 }
 
