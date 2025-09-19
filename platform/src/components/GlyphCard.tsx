@@ -1,21 +1,28 @@
 import Image from "next/image";
-import Link from "next/link";
-import { Glyph } from "@/lib/types";
 
-interface GlyphCardProps {
+export type Glyph = {
+  id: string;
+  name: string;
+  meaning: string | null;
+  created_at: string | null;
+  image_url?: string | null;   // ✅ added
+  description?: string | null; // ✅ added
+};
+
+type GlyphCardProps = {
   glyph: Glyph;
-}
+};
 
 export default function GlyphCard({ glyph }: GlyphCardProps) {
   return (
-    <div className="border rounded-lg p-4 shadow-md bg-white">
+    <div className="p-4 border rounded shadow-md">
       <h2 className="text-xl font-bold mb-2">{glyph.name}</h2>
 
       {glyph.image_url && (
         <div className="mb-2">
           <Image
             src={glyph.image_url}
-            alt={glyph.name ?? "Glyph"}
+            alt={glyph.name}
             width={200}
             height={200}
             className="rounded"
@@ -23,18 +30,10 @@ export default function GlyphCard({ glyph }: GlyphCardProps) {
         </div>
       )}
 
-      {glyph.meaning && (
-        <p className="text-gray-600 mb-2">{glyph.meaning}</p>
-      )}
+      {glyph.meaning && <p className="text-gray-600">{glyph.meaning}</p>}
 
       {glyph.description && (
-        <p className="text-gray-700 mb-2">{glyph.description}</p>
-      )}
-
-      {glyph.link && (
-        <Link href={glyph.link} className="text-blue-600 underline">
-          Learn more
-        </Link>
+        <p className="mt-2 text-sm text-gray-500">{glyph.description}</p>
       )}
     </div>
   );
