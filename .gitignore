@@ -1,35 +1,29 @@
-# Dependencies
+# 🌿 Node & Dependency Artifacts
 node_modules/
-package-lock.json
+*.log
+*.lock
 
-# Build outputs
-.next/
-out/
-dist/
-
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# Env files
+# 🔐 Environment Scrolls
 .env
 .env.local
 .env.*.local
 
-# OS files
+# 🖥️ OS & Editor Residue
 .DS_Store
 Thumbs.db
+*.swp
 
-# Deno (ignore lockfile only if not used)
-deno.lock
+# 🧪 Diagnostic Scripts
+check-sanctuary.sh
 
-# Backups
-_backup/
-_backup_root/
-*.root
+# 📦 Package Managers
+.pnpm-store/
+.yarn/
+.npm/
 
-# Don’t ignore your source code!
-!src/lib/
-!src/components/
+# 🧬 Subproject Outputs
+platform/.next/
+platform/out/
+platform/dist/
+platform/.netlify/
+platform/.vercel/
