@@ -1,8 +1,10 @@
 # 🧬 Dependencies
 node_modules/
 
-# 🔐 Lockfile (preserve for reproducible builds)
+# 🔐 Lockfiles (keep if you want reproducible builds)
 # package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
 
 # ⚙️ Build outputs
 .next/
@@ -19,4 +21,15 @@ dist/
 # 📜 Logs
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
+pnpm-debug.log*
+
+# 🖼️ OS/Editor junk
+.DS_Store
+*.swp
+*.swo
+
+# ✅ Scripts — keep custom scripts tracked
+# (don’t ignore scripts/, since we want check-env.js etc.)
+# If you want to ignore temporary files only:
+scripts/*.log
+scripts/*.tmp
