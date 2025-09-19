@@ -7,9 +7,6 @@
   NEXT_DISABLE_SWC = "1"
   NODE_VERSION = "22"
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-
 [context.production.environment]
   NODE_ENV = "production"
 
