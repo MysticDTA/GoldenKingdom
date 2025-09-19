@@ -1,7 +1,20 @@
-// scripts/supabaseClient.js
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from "@supabase/supabase-js";
 
-const SUPABASE_URL = 'https://your-project-id.supabase.co'
-const SUPABASE_ANON_KEY = 'your-anon-key'
+// Public client (safe for frontend)
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error("❌ Missing Supabase environment variables");
+}
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+// Optional: server-side client (uses service key)
+export const createServerSupabase = () => {
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!serviceKey) {
+    throw new Error("❌ Missing SUPABASE_SERVICE_ROLE_KEY");
+  }
+  return createClient(supabaseUrl, serviceKey);
+};
