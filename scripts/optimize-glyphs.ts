@@ -1,14 +1,31 @@
 // scripts/optimize-glyphs.ts
-import { optimize } from "npm:svgo";
-import { walk } from "https://deno.land/std/fs/walk.ts";
+import { promises as fs } from "fs";
+import path from "path";
+import { optimize } from "svgo";
 
-try {
-  for await (const entry of walk("public/svg", { exts: [".svg"] })) {
-    const raw = await Deno.readTextFile(entry.path);
-    const result = optimize(raw, { multipass: true });
-    await Deno.writeTextFile(entry.path, result.data);
-    console.log(`🜁 Optimized: ${entry.path}`);
+async function optimiseGlyphs(dir: string) {
+  const files = await fs.readdir(dir, { withFileTypes: true });
+
+  for (const file of files) {
+    if (file.isFile() && file.name.endsWith(".svg")) {
+      const filePath = path.join(dir, file.name);
+
+      // Read file
+      const original = await fs.readFile(filePath, "utf-8");
+
+      // Optimise
+      const result = optimize(original, { multipass: true });
+
+      // Save file
+      await fs.writeFile(filePath, result.data, "utf-8");
+
+      console.log(`🜁 Optimized: ${filePath}`);
+    }
   }
-} catch (err) {
-  console.warn("⚠️ Glyph folder not found. Skipping optimization.");
 }
+
+// Default glyphs path (adjust if needed)
+optimiseGlyphs(path.resolve("public/svg")).catch((err) => {
+  console.error("⚠️ Glyph optimization failed:", err);
+  process.exit(1);
+});
