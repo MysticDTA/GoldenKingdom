@@ -4,13 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "NEXT_FORCE_SWC_FALLBACK=true next build",
-    "start": "next start",
-    "lint": "next lint",
-    "precommit-check": "node scripts/check-env.js",
-    "optimise-glyphs": "ts-node scripts/optimise-glyphs.ts",
-    "prepare": "npm run precommit-check"
+  "dev": "next dev",
+  "build": "NEXT_FORCE_SWC_FALLBACK=true next build",
+  "start": "next start",
+  "lint": "next lint",
+  "precommit-check": "node scripts/check-env.js",
+  "optimise-glyphs": "ts-node scripts/optimise-glyphs.ts",
+  "prepare": "npm run precommit-check"
+}
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.1",
