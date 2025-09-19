@@ -1,14 +1,7 @@
-# Build settings for your Next.js application
 [build]
-  # Tell Netlify that your app is in the "platform" subfolder.
-  base = "platform"
+base = "platform"
+publish = ".next"
+command = "npm run build"
 
-  # The command to build your Next.js site.
-  command = "npm run build"
-
-  # The folder that contains the finished site.
-  publish = ".next"
-
-# Set a stable Node.js version for the build environment.
-[build.environment]
-  NODE_VERSION = "20"
+[functions]
+directory = "netlify/functions"
