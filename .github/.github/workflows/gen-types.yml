@@ -1,0 +1,33 @@
+name: Generate Supabase Types
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  generate-types:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install Supabase CLI
+        run: |
+          curl -L https://github.com/supabase/cli/releases/download/v1.180.3/supabase_linux_amd64.tar.gz | tar xz
+          sudo mv supabase /usr/local/bin/supabase
+
+      - name: Generate types
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ sbp_f7306a8a3c207c7787823283c7ef513e15574c99 }}
+        run: |
+          npx supabase gen types typescript --project-id dtzelnolhdvxslpkwstm > platform/src/lib/database.types.ts
+
+      - name: Commit and push types
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add platform/src/lib/database.types.ts
+          git commit -m "chore: update Supabase types" || echo "No changes to commit"
+          git push
