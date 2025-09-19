@@ -1,19 +1,11 @@
 [build]
-  base = "."
-  command = "npm run build"
-  publish = ".next"
+  base = "platform"
+  command = "NEXT_DISABLE_SWC=1 npm run build"
+  publish = "platform/.next"
 
 [build.environment]
-  # Disable SWC (fixes android/arm64 build issue)
   NEXT_DISABLE_SWC = "1"
+  NODE_VERSION = "22"
 
-  # Supabase (placeholders only — values come from Netlify UI Env Vars)
-  NEXT_PUBLIC_SUPABASE_URL = "https://your-project-ref.supabase.co"
-  NEXT_PUBLIC_SUPABASE_ANON_KEY = "your-anon-key-here"
-  SUPABASE_SERVICE_ROLE_KEY = "your-service-role-key-here"
-
-[dev]
-  command = "npm run dev"
-  port = 3000
-  targetPort = 3000
-  framework = "next"
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
