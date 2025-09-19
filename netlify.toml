@@ -1,7 +1,7 @@
 [build]
-base = "platform"
-publish = ".next"
-command = "npm run build"
+  base = "platform"
+  publish = "platform/.next"
+  command = "npm run build"
 
 [functions]
-directory = "netlify/functions"
+  directory = "platform/netlify/functions"
