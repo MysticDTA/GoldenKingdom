@@ -9,3 +9,18 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# Production (main branch)
+[context.production]
+  environment = { NODE_ENV = "production" }
+
+# Deploy Previews (PRs)
+[context.deploy-preview]
+  environment = { NODE_ENV = "development" }
+
+# Branch deploys (non-main branches)
+[context.branch-deploy]
+  environment = { NODE_ENV = "development" }
+
+[build.ignore]
+  command = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)docs/**' ':(exclude)scripts/**' ':(exclude)**/*.md'"
