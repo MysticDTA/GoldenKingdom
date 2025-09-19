@@ -1,8 +1,1 @@
-[build]
-  base = "platform"          # 👈 tells Netlify to use platform/ as project root
-  command = "npm run build"  # runs your build script
-  publish = "platform/.next" # Next.js output folder
 
-[build.environment]
-  NEXT_DISABLE_SWC = "1"     # disable SWC since you’re on Android/arm64
-  NODE_VERSION = "22"        # force Node.js 22
