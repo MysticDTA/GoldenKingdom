@@ -86,4 +86,5 @@ next
 # ✅ Always track GitHub Actions workflows
 !.github/
 !.github/workflows/
+# Ignore stray root-level script, but keep scripts/update-types.sh tracked
 /update-types.sh
