@@ -1,0 +1,17 @@
+#!/bin/bash
+# 🔄 Helper script to regenerate Supabase types locally
+
+set -e
+
+PROJECT_REF="dtzelnolhdvxslpkwstm" # replace if different
+OUTPUT_FILE="platform/src/lib/database.types.ts"
+
+echo "🔎 Generating Supabase types for project: $PROJECT_REF"
+supabase gen types typescript --project-id $PROJECT_REF > $OUTPUT_FILE
+
+echo "✅ Types updated at $OUTPUT_FILE"
+
+# Optionally commit immediately
+git add $OUTPUT_FILE
+git commit -m "chore: update Supabase types"
+echo "🚀 Types committed. Run 'git push origin main' to sync."
