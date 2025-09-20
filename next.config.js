@@ -2,7 +2,6 @@ const path = require("path");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  swcMinify: false, // Disable SWC minifier
   experimental: {
     forceSwcTransforms: false // Disable SWC transforms (fallback to Node.js compiler)
   },

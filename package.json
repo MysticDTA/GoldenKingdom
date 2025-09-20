@@ -11,5 +11,10 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",
     "next": "^15.5.3"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.13",
+    "eslint": "^9.36.0",
+    "typescript": "^5.9.2"
   }
 }
