@@ -16,7 +16,11 @@ export default async function handler(
     if (error) throw error;
 
     res.status(200).json(glyphs as Glyph[]);
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.status(500).json({ error: "Unknown error occurred" });
+    }
   }
 }
