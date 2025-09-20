@@ -53,3 +53,40 @@ yarn-error.log*
 
 # System files
 .DS_Store
+
+# Ignore personal/system files
+.bashrc
+.bash_logout
+.profile
+.ssh/
+.npm/
+.wget-hsts
+.npmrc
+
+# Ignore personal/system files accidentally moved
+.bashrc
+.bash_logout
+.profile
+.ssh/
+.npm/
+.npmrc
+.wget-hsts
+
+# Ignore personal/system files
+.bashrc
+.bash_logout
+.profile
+.ssh/
+.npm/
+.npmrc
+.wget-hsts
+
+# Ignore personal/system files
+.bashrc
+.bash_logout
+.profile
+.ssh/
+.npm/
+.npmrc
+.wget-hsts
+.npm/
