@@ -1,289 +1,1 @@
-[?25l[?2004h
-                                                                                                     
-  >  1. dtzelnolhdvxslpkwstm [name: GoldenKingdom, org: ebdaaynpliryehdlhqnt, region: ap-southeast-2]
-                                                                                                     
-                                                                                                     
-    ↑/k up • ↓/j down • / filter • q quit • ? more                                                   
-                                                                                                     [6A [J[2K[?2004l[?25h[?1002l[?1003l[?1006lexport type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[]
-
-export type Database = {
-  // Allows to automatically instantiate createClient with right options
-  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
-  __InternalSupabase: {
-    PostgrestVersion: "13.0.5"
-  }
-  public: {
-    Tables: {
-      glyphs: {
-        Row: {
-          created_at: string | null
-          description: string | null
-          id: string
-          image_url: string | null
-          meaning: string | null
-          name: string
-        }
-        Insert: {
-          created_at?: string | null
-          description?: string | null
-          id?: string
-          image_url?: string | null
-          meaning?: string | null
-          name: string
-        }
-        Update: {
-          created_at?: string | null
-          description?: string | null
-          id?: string
-          image_url?: string | null
-          meaning?: string | null
-          name?: string
-        }
-        Relationships: []
-      }
-      messages: {
-        Row: {
-          content: string
-          created_at: string | null
-          id: string
-          receiver_id: string | null
-          sender_id: string | null
-        }
-        Insert: {
-          content: string
-          created_at?: string | null
-          id?: string
-          receiver_id?: string | null
-          sender_id?: string | null
-        }
-        Update: {
-          content?: string
-          created_at?: string | null
-          id?: string
-          receiver_id?: string | null
-          sender_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "messages_receiver_id_fkey"
-            columns: ["receiver_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "messages_sender_id_fkey"
-            columns: ["sender_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      posts: {
-        Row: {
-          content: string
-          created_at: string | null
-          glyph_id: string | null
-          id: string
-          user_id: string | null
-        }
-        Insert: {
-          content: string
-          created_at?: string | null
-          glyph_id?: string | null
-          id?: string
-          user_id?: string | null
-        }
-        Update: {
-          content?: string
-          created_at?: string | null
-          glyph_id?: string | null
-          id?: string
-          user_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "posts_glyph_id_fkey"
-            columns: ["glyph_id"]
-            isOneToOne: false
-            referencedRelation: "glyphs"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "posts_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      profiles: {
-        Row: {
-          avatar_url: string | null
-          bio: string | null
-          created_at: string | null
-          id: string
-          username: string | null
-        }
-        Insert: {
-          avatar_url?: string | null
-          bio?: string | null
-          created_at?: string | null
-          id: string
-          username?: string | null
-        }
-        Update: {
-          avatar_url?: string | null
-          bio?: string | null
-          created_at?: string | null
-          id?: string
-          username?: string | null
-        }
-        Relationships: []
-      }
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      [_ in never]: never
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
-  }
-}
-
-type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
-
-type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
-
-export type Tables<
-  DefaultSchemaTableNameOrOptions extends
-    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
-    | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
-    : never = never,
-> = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
-      Row: infer R
-    }
-    ? R
-    : never
-  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])
-    ? (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
-        Row: infer R
-      }
-      ? R
-      : never
-    : never
-
-export type TablesInsert<
-  DefaultSchemaTableNameOrOptions extends
-    | keyof DefaultSchema["Tables"]
-    | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
-> = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Insert: infer I
-    }
-    ? I
-    : never
-  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
-    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
-        Insert: infer I
-      }
-      ? I
-      : never
-    : never
-
-export type TablesUpdate<
-  DefaultSchemaTableNameOrOptions extends
-    | keyof DefaultSchema["Tables"]
-    | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
-> = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Update: infer U
-    }
-    ? U
-    : never
-  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
-    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
-        Update: infer U
-      }
-      ? U
-      : never
-    : never
-
-export type Enums<
-  DefaultSchemaEnumNameOrOptions extends
-    | keyof DefaultSchema["Enums"]
-    | { schema: keyof DatabaseWithoutInternals },
-  EnumName extends DefaultSchemaEnumNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
-    : never = never,
-> = DefaultSchemaEnumNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
-  : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
-    ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
-    : never
-
-export type CompositeTypes<
-  PublicCompositeTypeNameOrOptions extends
-    | keyof DefaultSchema["CompositeTypes"]
-    | { schema: keyof DatabaseWithoutInternals },
-  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
-    : never = never,
-> = PublicCompositeTypeNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
-  : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
-    ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
-    : never
-
-export const Constants = {
-  public: {
-    Enums: {},
-  },
-} as const
+export type Json =  | string  | number  | boolean  | null  | { [key: string]: Json | undefined }  | Json[]export type DatThe Netlify deploy errored, with the following guidance provided:**Diagnosis:**The build failure is due to a type error in the file `types/supabase.ts` causing the build to fail with exit code 1. The error message indicates an invalid character at line 1 in the file.**Solution:**1. Go to the `types/supabase.ts` file in your repository.2. Line 1 seems to contain an invalid character that is causing the type error.3. Remove or replace the invalid character in line 1 of the `types/supabase.ts` file.4. After removing the invalid character, commit the changes to your repository.5. Trigger a new build to ensure the issue is resolved.This should fix the type error and allow the build to proceed successfully.The relevant error logs are:Line 70: Next.js cache restoredLine 71: [96m[1m​[22m[39mLine 72: [96m[1mbuild.command from netlify.toml                               [22m[39mLine 73: [96m[1m────────────────────────────────────────────────────────────────[22m[39mLine 74: ​Line 75: [36m$ npm run build[39mLine 76: > golden-kingdom-platform@0.1.0 buildLine 77: > next buildLine 78:    [1m[38;2;173;127;168m▲ Next.js 15.5.3[39m[22mLine 79:  [37m[1m [22m[39m Linting and checking validity of types ...Line 80: [31mFailed to compile.Line 81: [39mLine 82: [36m./types/supabase.ts[39m:[33m1[39m:[33m1[39mLine 83: [31m[1mType error[22m[39m: Invalid character.Line 84: [0m[31m[1m>[22m[39m[90m 1 |[39m [37m[41m[1m[22m[49m[39m[[33m?[39m[35m25[39ml[37m[41m[1m[22m[49m[39m[[3Line 85:  [90m   |[39m [31m[1m^[22m[39mLine 86:  [90m 2 |[39mLine 87:  [90m 3 |[39mLine 88:  [90m 4 |[39m   [33m>[39m  [35m1.[39m dtzelnolhdvxslpkwstm [name[33m:[39m [33mGoldenKingdom[39m[33m,[39m org[33m:[Line 89: Next.js build worker exited with code: 1 and signal: nullLine 90: Failed during stage 'building site': Build script returned non-zero exit code: 2Line 91: [91m[1m​[22m[39mLine 92: [91m[1m"build.command" failed                                        [22m[39mLine 93: [91m[1m────────────────────────────────────────────────────────────────[22m[39mLine 94: ​Line 95:   [31m[1mError message[22m[39mLine 96:   Command failed with exit code 1: npm run buildLine 97: ​Line 98:   [31m[1mError location[22m[39mLine 99:   In build.command from netlify.toml:Line 100:   npm run buildLine 101: ​Line 102:   [31m[1mResolved config[22m[39mLine 103:   build:Line 104:     command: npm run buildLine 105:     commandOrigin: configLine 106:     environment:Line 107:       - NEXT_NODE_VERSIONLine 108:       - NEXT_PUBLIC_SUPABASE_ANON_KEYLine 109:       - NEXT_PUBLIC_SUPABASE_URLLine 110:     publish: /opt/build/repo/.nextLine 111:     publishOrigin: configLine 112:   functionsDirectory: /opt/build/repo/netlify/functionsLine 113:   plugins:Line 114:     - inputs: {}Line 115:       origin: configLine 116:       package: "@netlify/plugin-nextjs"Line 117: Build failed due to a user error: Build script returned non-zero exit code: 2Line 118: Failing build: Failed to build siteLine 119: Finished processing build request in 23.595sabase = {  // Allows to automatically instantiate createClient with right options  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)  __InternalSupabase: {    PostgrestVersion: "13.0.5"  }  public: {    Tables: {      glyphs: {        Row: {          created_at: string | null          description: string | null          id: string          image_url: string | null          meaning: string | null          name: string        }        Insert: {          created_at?: string | null          description?: string | null          id?: string          image_url?: string | null          meaning?: string | null          name: string        }        Update: {          created_at?: string | null          description?: string | null          id?: string          image_url?: string | null          meaning?: string | null          name?: string        }        Relationships: []      }      messages: {        Row: {          content: string          created_at: string | null          id: string          receiver_id: string | null          sender_id: string | null        }        Insert: {          content: string          created_at?: string | null          id?: string          receiver_id?: string | null          sender_id?: string | null        }        Update: {          content?: string          created_at?: string | null          id?: string          receiver_id?: string | null          sender_id?: string | null        }        Relationships: [          {            foreignKeyName: "messages_receiver_id_fkey"            columns: ["receiver_id"]            isOneToOne: false            referencedRelation: "profiles"            referencedColumns: ["id"]          },          {            foreignKeyName: "messages_sender_id_fkey"            columns: ["sender_id"]            isOneToOne: false            referencedRelation: "profiles"            referencedColumns: ["id"]          },        ]      }      posts: {        Row: {          content: string          created_at: string | null          glyph_id: string | null          id: string          user_id: string | null        }        Insert: {          content: string          created_at?: string | null          glyph_id?: string | null          id?: string          user_id?: string | null        }        Update: {          content?: string          created_at?: string | null          glyph_id?: string | null          id?: string          user_id?: string | null        }        Relationships: [          {            foreignKeyName: "posts_glyph_id_fkey"            columns: ["glyph_id"]            isOneToOne: false            referencedRelation: "glyphs"            referencedColumns: ["id"]          },          {            foreignKeyName: "posts_user_id_fkey"            columns: ["user_id"]            isOneToOne: false            referencedRelation: "profiles"            referencedColumns: ["id"]          },        ]      }      profiles: {        Row: {          avatar_url: string | null          bio: string | null          created_at: string | null          id: string          username: string | null        }        Insert: {          avatar_url?: string | null          bio?: string | null          created_at?: string | null          id: string          username?: string | null        }        Update: {          avatar_url?: string | null          bio?: string | null          created_at?: string | null          id?: string          username?: string | null        }        Relationships: []      }    }    Views: {      [_ in never]: never    }    Functions: {      [_ in never]: never    }    Enums: {      [_ in never]: never    }    CompositeTypes: {      [_ in never]: never    }  }}type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]export type Tables<  DefaultSchemaTableNameOrOptions extends    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])    | { schema: keyof DatabaseWithoutInternals },  TableName extends DefaultSchemaTableNameOrOptions extends {    schema: keyof DatabaseWithoutInternals  }    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])    : never = never,> = DefaultSchemaTableNameOrOptions extends {  schema: keyof DatabaseWithoutInternals}  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {      Row: infer R    }    ? R    : never  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &        DefaultSchema["Views"])    ? (DefaultSchema["Tables"] &        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {        Row: infer R      }      ? R      : never    : neverexport type TablesInsert<  DefaultSchemaTableNameOrOptions extends    | keyof DefaultSchema["Tables"]    | { schema: keyof DatabaseWithoutInternals },  TableName extends DefaultSchemaTableNameOrOptions extends {    schema: keyof DatabaseWithoutInternals  }    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]    : never = never,> = DefaultSchemaTableNameOrOptions extends {  schema: keyof DatabaseWithoutInternals}  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {      Insert: infer I    }    ? I    : never  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {        Insert: infer I      }      ? I      : never    : neverexport type TablesUpdate<  DefaultSchemaTableNameOrOptions extends    | keyof DefaultSchema["Tables"]    | { schema: keyof DatabaseWithoutInternals },  TableName extends DefaultSchemaTableNameOrOptions extends {    schema: keyof DatabaseWithoutInternals  }    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]    : never = never,> = DefaultSchemaTableNameOrOptions extends {  schema: keyof DatabaseWithoutInternals}  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {      Update: infer U    }    ? U    : never  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {        Update: infer U      }      ? U      : never    : neverexport type Enums<  DefaultSchemaEnumNameOrOptions extends    | keyof DefaultSchema["Enums"]    | { schema: keyof DatabaseWithoutInternals },  EnumName extends DefaultSchemaEnumNameOrOptions extends {    schema: keyof DatabaseWithoutInternals  }    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]    : never = never,> = DefaultSchemaEnumNameOrOptions extends {  schema: keyof DatabaseWithoutInternals}  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]  : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]    ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]    : neverexport type CompositeTypes<  PublicCompositeTypeNameOrOptions extends    | keyof DefaultSchema["CompositeTypes"]    | { schema: keyof DatabaseWithoutInternals },  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {    schema: keyof DatabaseWithoutInternals  }    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]    : never = never,> = PublicCompositeTypeNameOrOptions extends {  schema: keyof DatabaseWithoutInternals}  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]  : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]    ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]    : neverexport const Constants = {  public: {    Enums: {},  },} as const
