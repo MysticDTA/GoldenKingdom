@@ -1,4 +1,10 @@
-export type Json =
+[?25l[?2004h
+                                                                                                     
+  >  1. dtzelnolhdvxslpkwstm [name: GoldenKingdom, org: ebdaaynpliryehdlhqnt, region: ap-southeast-2]
+                                                                                                     
+                                                                                                     
+    ↑/k up • ↓/j down • / filter • q quit • ? more                                                   
+                                                                                                     [6A [J[2K[?2004l[?25h[?1002l[?1003l[?1006lexport type Json =
   | string
   | number
   | boolean
