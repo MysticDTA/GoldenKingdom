@@ -1,111 +1,43 @@
 
-# 🌿 Node & Dependency Artifacts
-node_modules/
-*.log
-*.lock
-
-# 🔐 Environment Scrolls
-.env
-.env.local
-.env.*.local
-
-# 🖥️ OS & Editor Residue
-.DS_Store
-Thumbs.db
-*.swp
-
-# 📦 Package Managers
-.pnpm-store/
-.yarn/
-
-# ⚡ Supabase CLI binaries and archives
-supabase
-supabase*.tar.gz
-
-# 🛠️ Build Outputs
-.next/
-out/
-dist/
-# 🔄 Local backup folders (ignore completely)
 _backup/
 _backup_root/
-.env.local
-.env.local
-platform/.env.local
-platform/.env.local
-.env.local
-
-# Local environment files (DO NOT COMMIT)
-.env.local
-.env.*.local
-
-# Node dependencies
-node_modules/
-
+.bash_logout
+.bashrc
 # Build output
-.next/
+# 🛠️ Build Outputs
 dist/
-
+.DS_Store
+.env
+# 🔐 Environment Scrolls
+.env.*.local
+.env.local
+# Ignore personal/system files
+# 🔄 Local backup folders (ignore completely)
+# Local environment files (DO NOT COMMIT)
+*.lock
+*.log
 # Logs
+.next/
+# Node dependencies
+# 🌿 Node & Dependency Artifacts
+node_modules/
+.npm/
 npm-debug.log*
+.npmrc
+# 🖥️ OS & Editor Residue
+out/
+# 📦 Package Managers
+platform/.env.local
+.pnpm-store/
+.profile
+.ssh/
+supabase
+# ⚡ Supabase CLI binaries and archives
+supabase*.tar.gz
+*.swp
+# System files
+Thumbs.db
+.wget-hsts
+.yarn/
 yarn-debug.log*
 yarn-error.log*
-
-# System files
-.DS_Store
-
-# Ignore personal/system files
-.bashrc
-.bash_logout
-.profile
-.ssh/
-.npm/
-.wget-hsts
-.npmrc
-
-
-
-# Ignore personal/system files
-.bashrc
-.bash_logout
-.profile
-.ssh/
-.npm/
-.npmrc
-.wget-hsts
-
-# Ignore personal/system files
-.bashrc
-.bash_logout
-.profile
-.ssh/
-.npm/
-.npmrc
-.wget-hsts
-
-# Ignore personal/system files
-.bashrc
-.bash_logout
-.profile
-.ssh/
-.npm/
-.npmrc
-.wget-hsts
-
-# Ignore personal/system files
-.bashrc
-.bash_logout
-.profile
-.ssh/
-.npm/
-.npmrc
-.wget-hsts
-
-# Ignore personal/system files
-.bashrc
-.bash_logout
-.profile
-.ssh/
-.npm/
-.npmrc
-.wget-hsts
