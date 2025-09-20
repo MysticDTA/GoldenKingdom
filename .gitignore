@@ -86,3 +86,4 @@ next
 # ✅ Always track GitHub Actions workflows
 !.github/
 !.github/workflows/
+/update-types.sh

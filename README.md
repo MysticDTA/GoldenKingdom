@@ -20,3 +20,14 @@ This project integrates user profiles, glyphs, posts, and messages with a spirit
 ```bash
 git clone https://github.com/MysticDTA/GoldenKingdom.git
 cd GoldenKingdom/platform
+
+## 🔑 Supabase Types Workflow
+
+We no longer generate Supabase types automatically in CI/CD (GitHub Actions).  
+Instead, types are committed manually to keep builds fast and stable.
+
+### How to update types
+
+1. Make sure you have the Supabase CLI installed:
+   ```bash
+   supabase --version
