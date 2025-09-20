@@ -42,3 +42,4 @@ Thumbs.db
 yarn-debug.log*
 yarn-error.log*
 .gitignore.backup
+.env.local
