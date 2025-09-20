@@ -19,6 +19,26 @@ const eslintConfig = [
       "build/**",
       "next-env.d.ts",
     ],
+    rules: {
+      // default: don't block "any"
+      "@typescript-eslint/no-explicit-any": "warn",
+    },
+    overrides: [
+      {
+        files: ["src/**/*.{ts,tsx}", "pages/**/*.{ts,tsx}"],
+        rules: {
+          // stricter in production code
+          "@typescript-eslint/no-explicit-any": "error",
+        },
+      },
+      {
+        files: ["**/test-*.ts", "**/*.test.ts"],
+        rules: {
+          // looser for test/dev files
+          "@typescript-eslint/no-explicit-any": "off",
+        },
+      },
+    ],
   },
 ];
 
