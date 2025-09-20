@@ -64,3 +64,12 @@ yarn-error.log*
 .npmrc
 
 
+
+# Ignore personal/system files
+.bashrc
+.bash_logout
+.profile
+.ssh/
+.npm/
+.npmrc
+.wget-hsts
