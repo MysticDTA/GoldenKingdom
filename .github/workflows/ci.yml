@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # needed for committing back
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -30,13 +32,30 @@ jobs:
       - name: Build Next.js app
         run: npm run build
 
-      # ✅ Only run typegen on staging branch
+      # ✅ Supabase typegen runs only on staging branch
       - name: Supabase Typegen (staging only)
         if: github.ref == 'refs/heads/merge-dta'
         run: |
-          supabase gen types typescript \
+          set -e
+          echo "🔄 Running Supabase typegen..."
+          if supabase gen types typescript \
             --project-id "$SUPABASE_PROJECT_REF" \
-            | cat > platform/src/lib/database.types.ts
+            | cat > platform/src/lib/database.types.ts; then
+            echo "✅ Typegen succeeded"
+
+            # Commit changes if file actually changed
+            if ! git diff --quiet platform/src/lib/database.types.ts; then
+              git config user.name "github-actions[bot]"
+              git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+              git add platform/src/lib/database.types.ts
+              git commit -m "chore: update Supabase types [skip ci]"
+              git push origin merge-dta
+            else
+              echo "ℹ️ No changes in database.types.ts"
+            fi
+          else
+            echo "⚠️ Supabase typegen failed, keeping existing types"
+          fi
         env:
           SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
