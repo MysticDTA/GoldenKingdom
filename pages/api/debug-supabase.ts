@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
   // Simple test: get auth settings (safe endpoint)
-  const { data, error } = await supabase.auth.getSession();
+  const { data: _data, error } = await supabase.auth.getSession();
 
   res.status(200).json({
     supabaseUrl,
