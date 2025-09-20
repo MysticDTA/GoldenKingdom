@@ -83,3 +83,6 @@ tsconfig.test.json
 node_modules/
 glyphs
 next
+# ✅ Always track GitHub Actions workflows
+!.github/
+!.github/workflows/
