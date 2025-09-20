@@ -43,3 +43,34 @@ yarn-debug.log*
 yarn-error.log*
 .gitignore.backup
 .env.local
+# 🔐 Environment files
+.env
+.env.*.local
+.env.local
+
+# 📦 Dependencies & build
+node_modules/
+.npm/
+dist/
+.next/
+*.lock
+*.log
+npm-debug.log*
+
+# 🖥️ OS & editor files
+.DS_Store
+*.swp
+*.swo
+
+# 🔄 Local backups & tests
+types/supabase.backup.ts
+test-supabase.ts
+GoldenKingdom/   # accidental nested project folder
+_backup/
+_backup_root/
+
+# 🧪 Test configs
+tsconfig.test.json
+
+# 🎯 Misc
+*.tmp
