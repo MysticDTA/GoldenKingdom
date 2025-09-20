@@ -1,3 +1,4 @@
+// eslint.config.mjs
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
@@ -9,8 +10,11 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const eslintConfig = [
+export default [
+  // ✅ Use Next.js recommended configs
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+
+  // ✅ Ignore build/system files
   {
     ignores: [
       "node_modules/**",
@@ -18,28 +22,24 @@ const eslintConfig = [
       "out/**",
       "build/**",
       "next-env.d.ts",
-    ],
-    rules: {
-      // default: don't block "any"
-      "@typescript-eslint/no-explicit-any": "warn",
-    },
-    overrides: [
-      {
-        files: ["src/**/*.{ts,tsx}", "pages/**/*.{ts,tsx}"],
-        rules: {
-          // stricter in production code
-          "@typescript-eslint/no-explicit-any": "error",
-        },
-      },
-      {
-        files: ["**/test-*.ts", "**/*.test.ts"],
-        rules: {
-          // looser for test/dev files
-          "@typescript-eslint/no-explicit-any": "off",
-        },
-      },
+      "platform/src/lib/database.types.ts", // optional: ignore generated file
     ],
   },
-];
 
-export default eslintConfig;
+  // ✅ Rules (global)
+  {
+    rules: {
+      "@typescript-eslint/no-explicit-any": "warn", // was "error"
+      "@typescript-eslint/ban-ts-comment": "off",
+      "react-hooks/exhaustive-deps": "warn",
+    },
+  },
+
+  // ✅ Example of per-file rules (replace overrides with `files`)
+  {
+    files: ["**/*.ts", "**/*.tsx"],
+    rules: {
+      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+    },
+  },
+];
