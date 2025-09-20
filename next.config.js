@@ -1,19 +1,16 @@
-const path = require("path");
-
+// next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    forceSwcTransforms: false // Disable SWC transforms (fallback to Node.js compiler)
-  },
-  webpack: (config) => {
-    // Setup path aliases
-    config.resolve.alias["@"] = path.resolve(__dirname, "src");
-    config.resolve.alias["@/lib"] = path.resolve(__dirname, "src/lib");
-    config.resolve.alias["@/components"] = path.resolve(__dirname, "src/components");
-    config.resolve.alias["@/content"] = path.resolve(__dirname, "src/content");
-
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      // Prevent pdf-lib (or anything else) from trying to use 'fs' in the browser
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
+    }
     return config;
-  }
+  },
 };
 
 module.exports = nextConfig;
